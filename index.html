@@ -1,0 +1,2161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<!-- 离线单文件版：由 build-single.mjs 生成，请勿直接编辑 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>工大办事通 · 校园办事流程导航</title>
+<meta name="description" content="把广东工业大学东风路校区的高频办事流程，变成可以一步步跟着走的流程图。不需要注册，不收集任何个人信息。">
+<meta name="theme-color" content="#17457a">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSLlt6XlpKflip7kuovpgJoiPgogIDxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMTc0NTdhIi8+CiAgPHBhdGggZD0iTTE4IDIyaDI4TTE4IDMyaDI4TTE4IDQyaDE4IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNC41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI0NiIgY3k9IjQyIiByPSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGI0NWUiIHN0cm9rZS13aWR0aD0iNCIvPgo8L3N2Zz4K">
+<style>
+/* 工大办事通 · 样式
+ * 设计原则：信息优先、高对比度、可打印、移动端可用
+ * 字体只使用系统字体，不加载任何外部字体文件（避免授权与网络依赖）
+ */
+
+:root {
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --ink: #15181d;
+  --ink-2: #59616e;
+  --ink-3: #868e9c;
+  --line: #e2e5eb;
+  --line-2: #f0f2f5;
+  --brand: #17457a;
+  --brand-2: #0e3059;
+  --brand-soft: #eaf0f8;
+  --accent: #c8791a;
+  --accent-soft: #fdf3e3;
+  --ok: #1b6e4a;
+  --ok-soft: #e8f4ee;
+  --warn: #a8481b;
+  --warn-soft: #fbeee7;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(21, 24, 29, .06), 0 8px 24px rgba(21, 24, 29, .05);
+  --maxw: 880px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.7 "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif;
+}
+
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--brand); color: #fff; padding: 10px 16px; border-radius: 0 0 var(--radius-sm) 0;
+  z-index: 10;
+}
+.skip:focus { left: 0; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- 顶栏 ---------- */
+.topbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 5;
+}
+.topbar-in {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; min-height: 64px;
+}
+.brand { display: flex; align-items: center; gap: 10px; color: inherit; }
+.brand:hover { text-decoration: none; }
+.brand-mark {
+  width: 36px; height: 36px; flex: none;
+  display: grid; place-items: center;
+  background: var(--brand); color: #fff;
+  border-radius: 10px; font-weight: 700; font-size: 18px;
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand-text strong { font-size: 16px; }
+.brand-text small { color: var(--ink-3); font-size: 12px; }
+.topnav { display: flex; gap: 18px; font-size: 14px; }
+.topnav a { color: var(--ink-2); }
+.topnav a:hover { color: var(--brand); }
+
+/* ---------- 通用 ---------- */
+main { padding: 28px 20px 56px; }
+h1 { font-size: 26px; line-height: 1.35; margin: 0 0 8px; }
+h2 { font-size: 18px; margin: 32px 0 12px; }
+h3 { font-size: 16px; margin: 0 0 6px; }
+p { margin: 0 0 12px; }
+.muted { color: var(--ink-3); font-size: 13px; }
+.lead { color: var(--ink-2); font-size: 17px; }
+
+.card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.pad { padding: 20px 22px; }
+
+.badge {
+  display: inline-block; padding: 2px 9px; border-radius: 999px;
+  font-size: 12px; line-height: 1.7; white-space: nowrap;
+}
+.badge-draft { background: var(--accent-soft); color: var(--accent); }
+.badge-verified { background: var(--ok-soft); color: var(--ok); }
+.badge-demo { background: var(--brand-soft); color: var(--brand); }
+.badge-plain { background: var(--line-2); color: var(--ink-2); }
+
+/* ---------- 首页头部 ---------- */
+.hero { margin-bottom: 22px; }
+.hero h1 { letter-spacing: -.2px; }
+.stats { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 16px; }
+.stat { display: flex; flex-direction: column; }
+.stat b { font-size: 22px; color: var(--brand); line-height: 1.2; }
+.stat span { font-size: 12px; color: var(--ink-3); }
+
+/* ---------- 搜索 ---------- */
+.search { margin: 22px 0 8px; position: relative; }
+.search input {
+  width: 100%; padding: 15px 52px 15px 18px;
+  font-size: 16px; font-family: inherit; color: var(--ink);
+  background: var(--card); border: 1.5px solid var(--line);
+  border-radius: var(--radius); outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.search input:focus { border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-soft); }
+.search .go {
+  position: absolute; right: 8px; top: 8px; bottom: 8px; width: 40px;
+  display: grid; place-items: center;
+  background: var(--brand); color: #fff;
+  border: 0; border-radius: var(--radius-sm); cursor: pointer; font-size: 16px;
+}
+.hint { font-size: 13px; color: var(--ink-3); margin: 8px 2px 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip {
+  padding: 5px 12px; font-size: 13px; font-family: inherit;
+  background: var(--card); color: var(--ink-2);
+  border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+}
+.chip:hover { border-color: var(--brand); color: var(--brand); }
+
+/* ---------- 流程卡片 ---------- */
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.flow-card {
+  display: block; color: inherit; padding: 16px 18px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  transition: transform .12s, border-color .12s;
+}
+.flow-card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--brand); }
+.flow-card h3 { margin: 0 0 6px; font-size: 16px; }
+.flow-card p { margin: 0 0 10px; font-size: 13px; color: var(--ink-2); }
+.flow-card .meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.result { padding: 14px 18px; }
+.result h3 { margin: 0 0 4px; font-size: 16px; }
+.why { font-size: 12.5px; color: var(--accent); margin: 0; }
+.score { font-size: 12px; color: var(--ink-3); }
+
+/* ---------- 详情页 ---------- */
+.back { display: inline-block; font-size: 14px; margin-bottom: 14px; color: var(--ink-2); }
+.detail-head { margin-bottom: 18px; }
+.detail-head .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.kv { display: grid; grid-template-columns: 88px 1fr; gap: 6px 12px; font-size: 14px; }
+.kv dt { color: var(--ink-3); }
+.kv dd { margin: 0; }
+
+.steps { list-style: none; margin: 0; padding: 0; }
+.step {
+  position: relative; padding: 0 0 22px 46px;
+  border-left: 2px solid var(--line); margin-left: 15px;
+}
+.step:last-child { border-left-color: transparent; padding-bottom: 0; }
+.step::before {
+  content: attr(data-n);
+  position: absolute; left: -16px; top: 0;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--brand); color: #fff; font-size: 14px; font-weight: 600;
+}
+.step-body { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); }
+.step-body h3 { margin-bottom: 4px; }
+.step-body > p { font-size: 14px; color: var(--ink-2); }
+
+.facts { display: grid; gap: 6px; margin: 12px 0 0; font-size: 13.5px; }
+.fact { display: flex; gap: 8px; }
+.fact b { flex: none; width: 68px; color: var(--ink-3); font-weight: 400; }
+
+.mats { list-style: none; margin: 12px 0 0; padding: 10px 12px; background: var(--line-2); border-radius: var(--radius-sm); }
+.mats li { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; padding: 3px 0; }
+.mats input { margin-top: 5px; flex: none; }
+.mats label { cursor: pointer; }
+.mats input:checked + label { color: var(--ink-3); text-decoration: line-through; }
+
+.pitfall { margin-top: 12px; padding: 10px 12px; background: var(--warn-soft); border-radius: var(--radius-sm); font-size: 13.5px; color: var(--warn); }
+.pitfall b { display: block; margin-bottom: 2px; }
+
+.empty { padding: 22px; text-align: center; background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius); }
+.empty h3 { margin-bottom: 6px; }
+.needlist { list-style: none; margin: 14px 0 0; padding: 0; text-align: left; display: grid; gap: 6px; }
+.needlist li { font-size: 13.5px; color: var(--ink-2); padding-left: 20px; position: relative; }
+.needlist li::before { content: "○"; position: absolute; left: 0; color: var(--ink-3); }
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 0; }
+.btn {
+  padding: 10px 18px; font-size: 14px; font-family: inherit; cursor: pointer;
+  background: var(--card); color: var(--ink); border: 1.5px solid var(--line); border-radius: var(--radius-sm);
+}
+.btn:hover { border-color: var(--brand); color: var(--brand); }
+.btn-primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+.btn-primary:hover { background: var(--brand-2); color: #fff; border-color: var(--brand-2); }
+
+.notice { margin-top: 22px; padding: 14px 16px; background: var(--brand-soft); border-radius: var(--radius); font-size: 13px; color: var(--brand-2); }
+.notice b { display: block; margin-bottom: 4px; }
+
+.sources { list-style: none; margin: 10px 0 0; padding: 0; font-size: 13.5px; }
+.sources li { padding: 6px 0; border-bottom: 1px solid var(--line-2); }
+.sources li:last-child { border-bottom: 0; }
+
+/* ---------- 补充信息卡片 ---------- */
+.note-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-left: 3px solid var(--brand);
+  border-radius: var(--radius); padding: 16px 20px; margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.note-card h3 { margin-bottom: 10px; font-size: 15px; }
+.notelist { list-style: none; margin: 0; padding: 0; font-size: 13.5px; color: var(--ink-2); }
+.notelist li { padding: 4px 0 4px 16px; position: relative; }
+.notelist li::before {
+  content: ""; position: absolute; left: 2px; top: 12px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--brand);
+}
+
+/* ---------- 关于页 ---------- */
+.prose { font-size: 15px; }
+.prose h2 { border-top: 1px solid var(--line); padding-top: 22px; }
+.prose ul { padding-left: 22px; }
+.prose li { margin-bottom: 6px; }
+.prose code { background: var(--line-2); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+.prose .tpl {
+  background: var(--line-2); border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 12px 16px; margin: 10px 0 16px; font-size: 13.5px; line-height: 1.9;
+  white-space: pre-wrap; font-family: inherit; color: var(--ink-2);
+}
+
+/* ---------- 页脚 ---------- */
+.footer { border-top: 1px solid var(--line); background: var(--card); padding: 20px 0 32px; }
+.footer p { margin: 0; }
+
+/* ---------- 小屏 ---------- */
+@media (max-width: 560px) {
+  main { padding: 20px 16px 44px; }
+  .wrap { padding: 0 16px; }
+  h1 { font-size: 22px; }
+  .brand-text small { display: none; }
+  .kv { grid-template-columns: 76px 1fr; }
+  .step { padding-left: 40px; }
+}
+
+/* ---------- 打印（分享给同学时可直接打印） ---------- */
+@media print {
+  .topbar, .footer, .actions, .search, .back, .skip { display: none !important; }
+  body { background: #fff; font-size: 12pt; }
+  .card, .step-body { box-shadow: none; border-color: #ccc; }
+  .step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#/">
+      <span class="brand-mark" aria-hidden="true">办</span>
+      <span class="brand-text">
+        <strong>工大办事通</strong>
+        <small>校园办事流程导航</small>
+      </span>
+    </a>
+    <nav class="topnav">
+      <a href="#/">流程列表</a>
+      <a href="#/about">关于与来源</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap" tabindex="-1"></main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="muted" id="footer-note"></p>
+  </div>
+</footer>
+
+<script>window.__SINGLE_FILE__ = true;</script>
+<script>
+/* 工大办事通 · 知识库
+ * ------------------------------------------------------------------
+ * 填写规范见 docs/知识库字段规范.md
+ *
+ * status 取值：
+ *   "draft"    来源待登记。若 steps 为空，界面显示"内容核实中"；
+ *              若 steps 已填，界面显示"内容已录入 · 来源核实中"。
+ *   "verified" 已核实（必须填写 verifiedBy / verifiedAt / sources）
+ *   "demo"     演示样例（非真实流程，仅用于展示界面）
+ *
+ * 铁律：写不出 sources 的流程，不要标成 verified。
+ * ------------------------------------------------------------------
+ */
+
+window.SITE = {
+  name: '工大办事通',
+  school: '广东工业大学',
+  campus: '东风路校区',
+  updatedAt: '2026-10-14',
+  // 取材范围说明，会显示在"关于与来源"页
+  scope: '东风路校区本科生高频办事事项',
+
+  /* 纠错渠道：把邮箱填进来，"关于与来源"页会自动生成纠错说明和反馈模板。
+   * 建议单独注册一个专用邮箱，不要用私人常用邮箱（会被公开在作品里）。 */
+  feedback: {
+    email: 'xuankai@mails.gdut.edu.cn',
+    label: '纠错邮箱',
+    responseNote: '每一条反馈我们都会去核实：能核实的会在对应流程页更新内容，并在来源里记上"同学反馈并核实"。'
+  }
+};
+
+window.FLOW_CATEGORIES = [
+  { id: 'records', name: '学籍与成绩' },
+  { id: 'aid',     name: '奖助与证明' },
+  { id: 'space',   name: '场地与设备' },
+  { id: 'library', name: '图书与资源' },
+  { id: 'service', name: '报修与后勤' }
+];
+
+/* 步骤为空时，界面会照着这个清单显示"正在核实哪些信息" */
+window.NEED_FIELDS = [
+  '办理条件：谁可以办、什么时候能办',
+  '所需材料：每样材料去哪拿、要不要盖章',
+  '办理地点与窗口时间',
+  '办理时限：多久出结果',
+  '常见驳回原因：什么情况会被退回'
+];
+
+/* 待登记的来源清单见 docs/来源核实清单.md */
+window.NEEDS_SOURCE = '这条流程的具体信息已经整理完成，信息来源正在逐条登记与复核。登记前请以学校官方通知为准。';
+
+window.FLOWS = [
+  /* ============================ 学籍与成绩 ============================ */
+  {
+    id: 'change-major',
+    name: '转专业申请',
+    category: 'records',
+    aliases: ['转专业', '转系', '换专业', '转专业申请'],
+    keywords: ['转专业', '转系', '换专业', '绩点', '排名', '科类', '考核', '面试', '降级'],
+    audience: '大一在读本科生（大二申请一般需降级转入，大三基本不可申请）',
+    summary: '每学年春季学期开放一次。成功转专业只能有一次；失败后能不能再报，各学院政策不同。',
+    steps: [
+      {
+        title: '先确认你有没有资格',
+        detail: '硬性条件：所有课程无挂科（首次考核合格）。艺设学院（东风路）要求大一上绩点排名专业前 50%，不同接收学院的门槛不一样，以目标学院当年方案为准。另外不能跨高考科类转专业：物理类只能转入物理类专业，美术类只能转入美术类专业。',
+        materials: [],
+        place: '查看目标学院当年公布的转专业方案',
+        duration: '春季学期开始前就要确认',
+        pitfalls: [
+          '成功转专业只能有一次——转成功之后主修专业就变更了。',
+          '转专业失败后能不能再报名，各学院规定不一样：有的学院只允许报一次，有的学院不限次数，必须以目标学院当年的官网政策为准。',
+          '不能跨高考科类：例如数字媒体技术只接收高考物理类生源，美术类考生不能转入。'
+        ]
+      },
+      {
+        title: '等当年通知，下载申请表',
+        detail: '转专业每学年春季学期（上半年，一般 4 月左右）开放，要求在第 2 学期第 7 周提交材料。学校会提前发布转专业通知，不同年份日期小幅浮动。《本科转专业申请表》在当年学院通知的附件里下载。',
+        materials: ['《本科转专业申请表》（当年学院通知附件下载）'],
+        place: '学院通知 / 教务处通知',
+        duration: '材料需在第 2 学期第 7 周前提交',
+        pitfalls: ['不同年份日期会小幅浮动，不要照搬往年的日期。']
+      },
+      {
+        title: '打印成绩单并到学院盖章',
+        detail: '先在自助终端打印成绩单，再到本学院加盖公章，同时准备专业排名证明。不需要家长签字。',
+        materials: ['成绩单（自助终端打印后到学院盖章）', '专业排名证明（加盖学院公章）'],
+        place: '自助终端 → 本学院',
+        duration: '按通知截止时间倒推预留',
+        pitfalls: []
+      },
+      {
+        title: '纸质材料交给本学院教务员',
+        detail: '纸质材料交给本学院教务员，由学院统一流转。不是直接交给教务处，也不是纯线上系统提交。',
+        materials: [],
+        place: '本学院教务员',
+        duration: '按通知截止时间',
+        pitfalls: ['不要直接跑去教务处，材料必须先经过本学院。']
+      },
+      {
+        title: '走完四层审批，准备接收学院考核',
+        detail: '审批链条共 4 层：学生提交 → 现学院（转出学院）初审 → 接收学院组织考核、评审 → 教务处复核 → 教务处公示录取名单。考核形式由接收学院自主决定，常见组合是绩点筛选 + 面试，部分专业增设笔试。东风路艺设学院往年做法：先看绩点排名筛选入围，之后面试，考察作品集和专业认知，没有笔试。',
+        materials: ['作品集（如接收学院要求）'],
+        place: '接收学院组织',
+        duration: '按接收学院安排',
+        pitfalls: ['东风路艺设学院不设笔试，但面试会看作品集和专业认知，需要提前准备。']
+      },
+      {
+        title: '查询公示结果',
+        detail: '考核结束后约 1–2 周，在教务处官网和学院通知里公示录取名单。',
+        materials: [],
+        place: '教务处官网 / 学院通知',
+        duration: '考核结束后约 1–2 周',
+        pitfalls: []
+      }
+    ],
+    notes: [
+      {
+        title: '转专业与辅修的冲突关系',
+        lines: [
+          '转专业一旦成功，主修专业直接变更，已申请的辅修会自动失效。',
+          '成功转专业只有一次机会，所以通常优先选择其一，不建议同时申报两个。',
+          '但"失败后能不能再报"和"能不能再转成功一次"是两件事：前者各学院政策不同，后者全校统一只有一次。报名前先看目标学院当年的官网通知。'
+        ]
+      }
+    ],
+    sources: [],
+    status: 'draft',
+    verifiedBy: '',
+    verifiedAt: '',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'minor',
+    name: '辅修报名',
+    category: 'records',
+    aliases: ['辅修', '辅修报名', '双学位', '第二专业', '修读辅修专业'],
+    keywords: ['辅修', '双学位', '报名', '学分', '学费', '绩点', '教务系统'],
+    audience: '仅限大一学生申请',
+    summary: '大一第 2 学期开放报名，全程线上填报，80 元/学分，大一阶段只有这一次机会。',
+    steps: [
+      {
+        title: '先算一遍你的平均学分绩点',
+        detail: '申请修读辅修的条件是：在校一年级学生，政治素质好、身体健康，一年级第 1 学期所修读主要课程无不及格（含补考），且平均学分绩点在 2.5 以上。',
+        materials: [],
+        place: '成绩可在教务系统查询',
+        duration: '报名窗口开放前确认',
+        pitfalls: ['绩点门槛是 2.5，不是 2.0——差 0.1 就报不上，报名前先自己算一遍。']
+      },
+      {
+        title: '在一年级第 2 学期留意辅修报名通知',
+        detail: '符合修读条件的学生，于一年级第 2 学期根据学校发布的辅修报名通知进行报名。具体开放日期以教务处当年通知为准。',
+        materials: [],
+        place: '教务处通知',
+        duration: '一年级第 2 学期',
+        pitfalls: []
+      },
+      {
+        title: '在教务管理系统网上报名',
+        detail: '登录教务管理系统提交网上报名。',
+        materials: [],
+        place: '教务管理系统',
+        duration: '报名窗口期内',
+        pitfalls: []
+      },
+      {
+        title: '等学院审核和教务处复核录取',
+        detail: '完整流程是：学生网上报名 → 学生所在学院审核 → 送教务处 → 教务处复核并录取。',
+        materials: [],
+        place: '教务处',
+        duration: '以教务处通知为准',
+        pitfalls: []
+      },
+      {
+        title: '按学期缴纳辅修学费',
+        detail: '辅修收费 80 元/学分，每学期按修读学分缴费，在校园统一支付平台缴费。辅修总学分一般 30 学分左右，跟随主修同步完成。',
+        materials: [],
+        place: '校园统一支付平台',
+        duration: '每学期按修读学分缴纳',
+        pitfalls: ['转专业一旦成功，主修专业直接变更，辅修申请会自动失效；两者不建议同时申报。']
+      }
+    ],
+    notes: [],
+    sources: [
+      {
+        label: "教务处常见问答《【辅修】辅修什么时候可以申请，有什么要求？》",
+        url: "https://jwc.gdut.edu.cn/info/1333/4130.htm",
+        note: "2026-10-14 查阅官网原文；绩点门槛由本文确认（2.5，原稿 2.0 有误）"
+      }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'transcript',
+    name: '成绩单打印',
+    category: 'records',
+    aliases: ['打印成绩单', '成绩单', '中英文成绩单', '在读证明成绩单', 'GPA 证明', '密封成绩单'],
+    keywords: ['成绩单', '打印', '英文', '电子公章', 'GPA', '绩点', '自助打印', '出国', '密封', '骑缝章'],
+    audience: '在校本科生（毕业生需走档案馆，不能用自助机）',
+    summary: '在校生在各校区自助终端 24 小时随时打印，中英文成绩单和在读证明都能出；出国要密封件的必须再去人工窗口。',
+    steps: [
+      {
+        title: '到各校区的自助打印终端',
+        detail: '在校本科生可在各校区的自助打印机器上自行办理。自助终端 24 小时开机，可以打印中文成绩单、英文成绩单、在读证明等材料。',
+        materials: [],
+        place: '各校区自助打印终端',
+        duration: '即时，机器 24 小时开机',
+        pitfalls: ['自助机办不了密封和骑缝章，出国用必须再走人工窗口。']
+      },
+      {
+        title: '选择核验方式登录',
+        detail: '刷身份证，或者用学号登录。',
+        materials: ['身份证 / 学号'],
+        place: '自助终端',
+        duration: '即时',
+        pitfalls: []
+      },
+      {
+        title: '打印成绩单',
+        detail: '自助终端直接输出成绩单。关于是否收费、输出件是否自带电子公章，我们还没有在教务处官方页面找到依据——请不要默认免费、也不要默认可以直接使用，以自助机上的提示和教务处答复为准；如果接收单位要求加盖公章，走下一步的人工窗口。',
+        materials: [],
+        place: '自助终端',
+        duration: '即时',
+        pitfalls: ['「自助打印免费、自带电子公章」这一条尚未核实，办理前先确认。']
+      },
+      {
+        title: '出国用途：带原件和信封到图书馆 723 办密封',
+        detail: '密封与骑缝章自助机办不了，必须走人工。教务处官方办理指引写明：携带成绩单及证明原件，并自备学校信封，前往各校区教务处/教务办核验与密封。东风路校区的办理点是图书馆 723，电话 37626229。去之前建议先打个电话确认当天的办理时间。',
+        materials: ['成绩单及证明原件', '自备学校信封'],
+        place: '东风路校区图书馆 723（电话 37626229）',
+        duration: '去之前先电话确认办理时间',
+        pitfalls: [
+          '必须自备学校信封，自助机不提供密封服务。',
+          '办公时间可能会调整，以电话答复为准。'
+        ]
+      },
+      {
+        title: '已毕业学生：改走档案馆',
+        detail: '已毕业学生可以回校打印，但不能使用自助打印机。中文成绩单前往学校档案馆申请办理；英文成绩单先在档案馆开具中文成绩单，再按照教务处通知申请翻译版本。',
+        materials: [],
+        place: '学校档案馆',
+        duration: '待核实',
+        pitfalls: ['毕业生用不了自助机，别白跑一趟图书馆。']
+      }
+    ],
+    notes: [
+      {
+        title: '广工本科百分制与绩点换算',
+        lines: [
+          '90–100 分 = 4.0　　85–89 分 = 3.7　　82–84 分 = 3.3',
+          '78–81 分 = 3.0　　75–77 分 = 2.7　　72–74 分 = 2.3',
+          '68–71 分 = 2.0　　64–67 分 = 1.5　　60–63 分 = 1.0',
+          '＜60 分 = 0',
+          '加权平均绩点公式：加权 GPA = Σ（课程学分 × 课程绩点）÷ Σ 课程学分'
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: "教务处常见问答《成绩单相关证明》",
+        url: "https://jwc.gdut.edu.cn/cjwd/zmjzjbl/cjdxgzm.htm",
+        note: "2026-10-14 查阅官网原文；东风路校区密封点（图书馆 723、37626229）由该页确认"
+      }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'makeup-exam',
+    name: '缓考与补考',
+    category: 'records',
+    aliases: ['缓考', '补考', '申请缓考', '重修', '旷考', '缺考'],
+    keywords: ['缓考', '补考', '重修', '旷考', '病假', '医院证明', '成绩', '教务系统'],
+    audience: '因疾病、意外等不可抗力无法参加期末考试，或需要参加补考、重修的本科生',
+    summary: '缓考要在考试前 2 天在教务系统提交，走"任课老师认定资格 → 教务处审核"；审核通过后参加下学期初的缓补考。',
+    steps: [
+      {
+        title: '先判断你的情况能不能申请缓考',
+        detail: '因疾病、意外等不可抗力无法参加期末考试，可以申请缓考。疾病需要提供医院或校医院的病假单作为证明材料。',
+        materials: [],
+        place: '—',
+        duration: '考试前 2 天之前就要判断',
+        pitfalls: [
+          '单纯怕考不过、或者时间冲突，不能申请缓考。',
+          '必须在考试前提交申请，考试结束后一般不允许补申请。'
+        ]
+      },
+      {
+        title: '考试前 2 天在本科教务系统提交缓考申请',
+        detail: '整个流程在本科教务系统里流转。学生应于考试前 2 天在本科教务系统提交课程「缓考」申请，并填写缓考原因和证明材料。',
+        materials: ['缓考原因说明', '证明材料（疾病需医院或校医院的病假单）'],
+        place: '本科教务系统',
+        duration: '考试前 2 天',
+        pitfalls: ['是"考试前 2 天"，不是"考试当天之前"——卡着时间提交可能来不及走完审批。']
+      },
+      {
+        title: '等任课老师认定考试资格，再由教务处审核',
+        detail: '提交后先由任课老师认定你的考试资格，再由教务处审核。审核结果可以随时登录教务系统查看，一般在任课老师完成考试资格认定后一个工作日内教务处就会审核。',
+        materials: [],
+        place: '本科教务系统（线上查看结果）',
+        duration: '资格认定后约 1 个工作日',
+        pitfalls: [
+          '任课老师这一环是"认定考试资格"，不是走过场，别以为提交了就完事。',
+          '如果在考试前任课老师未认定，或教务处审核不通过，你必须按时参加该课程本学期的考试。'
+        ]
+      },
+      {
+        title: '审核通过后：参加下学期初的缓补考',
+        detail: '审核通过后，应参加下一学期初的缓补考考试。',
+        materials: [],
+        place: '以教务处通知为准',
+        duration: '下一学期初',
+        pitfalls: [
+          '缓考审核通过的课程，你不能再参加本学期的考试——考场签到表上已标注缓考，私自参加考试成绩无效。',
+          '缓考不及格、或不能按时参加考试的，不能再补考。',
+          '有特殊原因需要取消缓考的，必须考前至少提前 2 天到教务处行政楼 314 办理取消。'
+        ]
+      },
+      {
+        title: '千万注意：缺课或缺作业超过 1/3 会直接失去考试资格',
+        detail: '学生缺课累计超过某门课程教学时数 1/3 的，或缺交作业（含习题、实验报告）次数超过该课程作业总次数 1/3 的，均无考试资格。任课老师会在考试前一周审查课程考核资格，由学生学院告知学生。',
+        materials: [],
+        place: '由任课老师审查、学院告知',
+        duration: '考试前一周审查',
+        pitfalls: ['被取消考试资格的学生，不允许参加该门课程的补考——这是比缓考更严重的情况，平时缺课缺作业要盯紧。']
+      },
+      {
+        title: '补考的报名与重修',
+        detail: '补考需要确认补考资格并报名，具体流程见教务处「补考资格确认报名流程」。关于补考成绩如何录入、重修如何缴费报名，我们还没有在教务处官方页面核实到，请以教务处通知为准。',
+        materials: [],
+        place: '本科教务系统 / 教务处',
+        duration: '留意教务处通知',
+        pitfalls: ['「补考不收费、重修按学分缴费」「补考成绩标注补考」这几条尚未核实，不要当成定论。']
+      }
+    ],
+    notes: [],
+    sources: [
+      {
+        label: "教务处常见问答《考试管理》（缓考、未准考试、补考）",
+        url: "https://jwc.gdut.edu.cn/cjwd/jwgl1/ksgl1.htm",
+        note: "2026-10-14 查阅官网原文；办理流程与时限由本文确认"
+      }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  /* ============================ 奖助与证明 ============================ */
+  {
+    id: 'scholarship',
+    name: '奖助学金申请',
+    category: 'aid',
+    aliases: ['奖学金', '助学金', '国家奖学金', '国家励志奖学金', '困难认定', '绿色通道', '资助'],
+    keywords: ['奖学金', '助学金', '励志', '困难认定', '家庭经济困难', '绿色通道', '资助', '勤工助学', '预科生', '退役士兵'],
+    audience: '在校本科生（国家奖学金、国家励志奖学金限二年级及以上；国家助学金面向家庭经济困难学生，含预科生）',
+    summary: '国家奖学金 10000 元、励志奖学金 6000 元、国家助学金平均 3700 元；励志和助学金都要先做困难认定。',
+    steps: [
+      {
+        title: '先弄清三类国家奖助学金的区别',
+        detail: '国家奖学金：奖励二年级及以上优秀在校本科生，每生每年 10000 元。国家励志奖学金：奖励品学兼优且家庭经济困难的二年级及以上本科生，每生每年 6000 元。国家助学金：资助家庭经济困难的本科生（含预科生），平均每生每年 3700 元，学校在 2500–5000 元范围内分 2–3 档确定；全日制在校退役士兵学生原则上都可以享受，标准为每生每年 3700 元。',
+        materials: [],
+        place: '—',
+        duration: '—',
+        pitfalls: [
+          '国家奖学金和国家励志奖学金不能同时获得。',
+          '获得国家奖学金或国家励志奖学金的家庭经济困难学生，可以同时申请并获得国家助学金。',
+          '国家奖学金和国家励志奖学金都要求二年级及以上，大一第一学期不能申报。'
+        ]
+      },
+      {
+        title: '需要资助的，先完成家庭经济困难认定',
+        detail: '国家励志奖学金和国家助学金都要求先通过家庭经济困难认定。需要填写《广东省家庭经济困难学生认定申请表》——这张表随录取通知书和政策简介一并下发，也可以在「广东教育」微信公众号（gdsjyt）菜单栏「微专题」—「学生资助」栏目下载。',
+        materials: ['《广东省家庭经济困难学生认定申请表》（随录取通知书下发 / 公众号下载）', '原建档立卡、低保、特困救助等相关材料复印件'],
+        place: '—',
+        duration: '认定结果当学年有效',
+        pitfalls: [
+          '这张表不需要盖章，但必须由本人承诺并签字，务必如实填写。',
+          '原建档立卡、低保、特困救助等学生记得带上相关材料复印件。'
+        ]
+      },
+      {
+        title: '学费住宿费凑不齐：报到当天走「绿色通道」先入学',
+        detail: '家庭经济特别困难、暂时筹集不齐学费和住宿费的新生，可以在开学报到当天通过学校开设的「绿色通道」先办理入学手续，入校后再向学校申报家庭经济困难，由学校核实认定后采取不同措施给予资助。',
+        materials: [],
+        place: '开学报到当天的「绿色通道」',
+        duration: '报到当天办理',
+        pitfalls: ['不要因为凑不齐学费就不来报到——绿色通道就是为这种情况设立的，先入学、再解决费用。']
+      },
+      {
+        title: '想清楚先解决哪一头：学费住宿费还是生活费',
+        detail: '学校的资助体系是有分工的：解决学费、住宿费问题，以国家助学贷款为主、国家励志奖学金等为辅；解决生活费问题，以国家助学金为主、勤工助学等为辅。所以如果你两样都紧张，通常是「贷款 + 助学金」的组合。',
+        materials: [],
+        place: '—',
+        duration: '—',
+        pitfalls: ['只申请助学金解决不了学费；只贷款也解决不了生活费，两个要分开看。']
+      },
+      {
+        title: '校内和社会奖助学金也可以争取',
+        detail: '校内设有优秀学生奖学金、学习标兵奖学金、优秀学生干部奖学金、学业进步奖学金、学生创新奖学金、校园文艺菁英奖学金、社会实践菁英奖学金等，标准从 100 元到 2000 元不等，具体见下方「校内奖学金标准」。校院两级还设有米亚奖学金、三七互娱大学生赋能奖助学金、榕江奖学金、金明奖助学金、仲明大学生助学金、视源优秀学生奖学金、聚石化学奖学金等社会奖助学金。学校另有勤工助学岗位、临时困难资助和筑梦成长营助学金。',
+        materials: [],
+        place: '—',
+        duration: '—',
+        pitfalls: ['各类奖学金的奖励标准和申报时间各不相同，以学生工作处当年通知为准。']
+      },
+      {
+        title: '有疑问找：学生工作处学生资助管理中心',
+        detail: '奖助学金和学生资助的归口部门是学生工作处学生资助管理中心。联系电话：020-39322619、39322610；邮箱：xsczdb@gdut.edu.cn；部门主页：zxdk.gdut.edu.cn；办公地址：广州市番禺区广州大学城外环西路 100 号广东工业大学行政楼 401 室。',
+        materials: [],
+        place: '学生工作处学生资助管理中心（大学城校区行政楼 401 室）',
+        duration: '工作日办公',
+        pitfalls: ['资助管理中心在大学城校区，不在东风路。去之前先打电话确认是否需要本人到场。']
+      }
+    ],
+    notes: [
+      {
+        title: '申报时间（我们还没核实到官方原文）',
+        lines: [
+          '各类奖助学金的申报时间以学生工作处当年通知为准，我们没有在官方页面上找到具体日期，所以不写死。',
+          '建议直接致电 020-39322619 问一句，或留意辅导员在班群里的通知。'
+        ]
+      },
+      {
+        title: '防诈骗提醒（学校原文）',
+        lines: [
+          '开学前后是电信、网络诈骗高发期。诈骗分子会冒充大学老师、资助机构工作人员，通过短信、电话、微信或 QQ 骗取钱财；',
+          '或以「先学后付」「免息分期」等名义发放互联网消费贷款，引诱学生参加各种技能培训，使学生陷入高额贷款陷阱。',
+          '记住一件事：任何奖助学金都不会要求你先交钱、先转账或先付手续费。'
+        ]
+      },
+      {
+        title: '还有一项面向大一新生的资助',
+        lines: [
+          '广东省家庭经济困难大学新生资助：面向当年考入全日制普通高校、广东省户籍的家庭经济困难本科一年级新生，每生最高不超过 6000 元。',
+          '考入省内高校的新生开学时向学校申请；考入省外高校的新生向户籍所在地县级教育部门申请。'
+        ]
+      },
+      {
+        title: '校内奖学金标准（本科生）',
+        lines: [
+          '优秀学生奖学金：一等奖 2000 元、二等奖 1000 元、三等奖 600 元',
+          '学习标兵奖学金：500 元',
+          '优秀学生干部奖学金：200 元',
+          '学业进步奖学金：100 元',
+          '学生创新奖学金：个人项目 500 元、集体项目 800 元',
+          '校园文艺菁英奖学金：个人项目 200 元、集体项目 500 元',
+          '社会实践菁英奖学金：个人项目 200 元、集体项目 500 元',
+          '（单位均为元/生·年）'
+        ]
+      },
+      {
+        title: '研究生奖助学金标准（本站主要面向本科生，一并列出供参考）',
+        lines: [
+          '研究生学业奖学金（二、三年级）：博士生一等 18000 元（20%）、二等 15000 元（25%）、三等 12000 元（35%）；硕士生一等 10000 元（20%）、二等 6000 元（25%）、三等 2000 元（35%）。',
+          '一年级研究生学业奖学金按当年招生简章确定：全国统考录取的硕士 5000 元/年，推免录取的硕士 10000 元/年，非定向就业博士 15000 元/年，原则上全覆盖。',
+          '研究生国家奖学金：博士 30000 元/年，硕士 20000 元/年。',
+          '研究生国家助学金：博士 13000 元/年，另由学校额外资助 16000 元，合计 29000 元/年；硕士 6000 元/年。',
+          '研究生校内奖学金：研究生骨干奖学金 1000 元、文体活动菁英奖学金 200 元、社会实践菁英奖学金 200 元。'
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: '《广东工业大学学生奖助政策简介》（2026 年 6 月）· 广东工业大学迎新网',
+        url: 'https://yx.gdut.edu.cn/jxzx.htm',
+        note: '2026-10-14 查阅官网原文'
+      }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'student-loan',
+    name: '生源地信用助学贷款',
+    category: 'aid',
+    aliases: ['助学贷款', '生源地贷款', '贷款', '学费贷款', '续贷'],
+    keywords: ['助学贷款', '生源地', '贷款', '学费', '住宿费', '利息', 'LPR', '续贷', '户籍', '绿色通道'],
+    audience: '家庭经济困难的本科生（含预科生）、研究生',
+    summary: '开学前就要在户籍所在地申请，不是到学校再办；本科生每年最高 20000 元，在校期间利息全部由财政补贴。',
+    steps: [
+      {
+        title: '记住：这件事在开学前、去你户籍所在地办',
+        detail: '大学新生和在校生可以在开学前，向入学前户籍所在地的县（市、区）级学生资助管理部门申请生源地信用助学贷款。已经申请过的学生可以直接在网上申请续贷。',
+        materials: [],
+        place: '入学前户籍所在地的县（市、区）级学生资助管理部门',
+        duration: '开学前办理',
+        pitfalls: ['不是到学校再办，是去你户籍所在地办。很多人以为报到之后再申请，结果错过了时间。']
+      },
+      {
+        title: '确认你能贷多少',
+        detail: '本科生每生每年最高申请金额不超过 20000 元；研究生每生每年最高不超过 25000 元。',
+        materials: [],
+        place: '户籍所在地县级学生资助管理部门',
+        duration: '每年申请一次',
+        pitfalls: []
+      },
+      {
+        title: '了解利息和还款安排（这是它最划算的地方）',
+        detail: '在校学习期间的国家助学贷款利息全部由财政补贴。毕业后前五年内只需偿还利息、不需还本金，自毕业第六年起开始偿还本金和利息。最长贷款期限为剩余学制加 15 年，最长不超过 22 年。新签订合同的利率按同期同档次贷款市场报价利率 LPR5Y 减 70 个基点执行。',
+        materials: [],
+        place: '—',
+        duration: '最长不超过 22 年',
+        pitfalls: ['在校期间不用付利息，毕业后还有五年只还息的缓冲期——不要因为怕还不起而不敢申请。']
+      },
+      {
+        title: '下载操作指南，按里面的流程准备材料',
+        detail: '学校迎新网的奖学助学页面底部提供了《2026 年生源地信用助学贷款操作指南（折页 PDF 版）》和《广东省家庭经济困难学生认定申请表（2026 版）》两个附件，可以下载后照着办。',
+        materials: ['《2026 年生源地信用助学贷款操作指南》（迎新网下载）'],
+        place: 'https://yx.gdut.edu.cn/jxzx.htm（页面底部附件）',
+        duration: '—',
+        pitfalls: []
+      },
+      {
+        title: '入学时还是凑不齐：先走「绿色通道」报到',
+        detail: '如果入学时暂时筹集不齐学费和住宿费，可以在开学报到当天通过学校开设的「绿色通道」先办理入学手续，入校后再向学校申报家庭经济困难，由学校核实认定后给予资助。',
+        materials: [],
+        place: '开学报到当天的「绿色通道」',
+        duration: '报到当天',
+        pitfalls: ['不要因为凑不齐钱就不来报到。']
+      }
+    ],
+    notes: [
+      {
+        title: '其他可以同时考虑的资助',
+        lines: [
+          '广东省家庭经济困难大学新生资助：广东省户籍、当年考入全日制普通高校的困难本科一年级新生，每生最高不超过 6000 元，开学时向学校申请。',
+          '勤工助学：学校为本科生设有勤工助学岗位。',
+          '临时困难资助、筑梦成长营助学金：面向家庭经济困难学生。',
+          '应征入伍服兵役：自 2024 年秋季学期起，学费补偿、国家助学贷款代偿和退役复学学费减免标准为本科生每生每年不超过 20000 元。'
+        ]
+      },
+      {
+        title: '防诈骗提醒（学校原文）',
+        lines: [
+          '开学前后是电信、网络诈骗高发期。',
+          '诈骗分子会冒充大学老师、资助机构工作人员，用各种手段骗取钱财，或发放互联网消费贷款，以「先学后付」「免息分期」等名义引诱学生参加技能培训。',
+          '正规的助学贷款只在户籍所在地的县级学生资助管理部门办理，不会让你先交手续费。'
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: '《广东工业大学学生奖助政策简介》（2026 年 6 月）· 广东工业大学迎新网',
+        url: 'https://yx.gdut.edu.cn/jxzx.htm',
+        note: '2026-10-14 查阅官网原文'
+      }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'registrar-stamp',
+    name: '教务处盖章',
+    category: 'aid',
+    aliases: ['盖章', '教务处盖章', '在读证明', '开具证明', '公章', '学籍证明'],
+    keywords: ['盖章', '教务处', '在读证明', '证明', '公章', '学籍证明', '中英文', '代办', '委托书'],
+    audience: '需要教务处出具或加盖教务类证明材料的学生',
+    summary: '只盖教务类文件，免费，窗口只在工作日开；社会实践表这类非教务文件要走学院公章。',
+    steps: [
+      {
+        title: '先确认你要盖的是不是教务处的章',
+        detail: '教务处可盖章的材料：中英文在读证明、中文/英文成绩单、学籍证明、学籍在线验证报告、课程修读证明、四六级报名相关证明等教务类文件。非教务业务文件（如社会实践表、个人申请材料）一般优先盖学院公章，不由教务处盖章。',
+        materials: [],
+        place: '教务处 / 学院',
+        duration: '—',
+        pitfalls: ['社会实践表、个人申请材料这类非教务文件，先找学院盖章，不要去教务处。']
+      },
+      {
+        title: '系统直接打印的教务文件可跳过学院环节',
+        detail: '在读证明、成绩单这类由系统直接打印的教务文件，不需要先经学院盖章。部分专项申请表格则需要学院先审核、签字盖章之后，才能送到教务处复核盖章。',
+        materials: [],
+        place: '—',
+        duration: '—',
+        pitfalls: ['专项申请表格要先走学院，直接去教务处会被退回来。']
+      },
+      {
+        title: '到行政楼教务处窗口办理',
+        detail: '东风路校区教务处窗口位于校区行政楼。办公时间：周一至周五上午 8:30–12:00，下午 14:00–17:00；周末和法定节假日不对外办公。',
+        materials: [],
+        place: '东风路校区行政楼教务处窗口',
+        duration: '办公时间：周一至周五 8:30–12:00 / 14:00–17:00',
+        pitfalls: ['周末和法定节假日不办公，别白跑。']
+      },
+      {
+        title: '免费盖章，不需要缴费',
+        detail: '学生办理在读证明、成绩单等教务证明材料免费盖章，不收取费用。',
+        materials: [],
+        place: '教务处窗口',
+        duration: '—',
+        pitfalls: []
+      },
+      {
+        title: '英文材料：优先用系统导出的官方英文版',
+        detail: '学校教务系统支持直接导出官方英文版成绩单、在读证明，可直接申请教务处盖章；自行翻译的英文材料，需要先完成翻译件核验才可以盖章。',
+        materials: [],
+        place: '教务系统 → 教务处窗口',
+        duration: '翻译件核验需要额外时间',
+        pitfalls: ['自己翻译的英文材料不能直接盖章，要先做翻译件核验。']
+      },
+      {
+        title: '需要代办时准备三样东西',
+        detail: '支持代办。代办人需要携带：①本人学生卡/身份证；②代办人身份证；③手写委托书（写明委托事项）。',
+        materials: ['本人学生卡或身份证', '代办人身份证', '手写委托书（写明委托事项）'],
+        place: '教务处窗口',
+        duration: '—',
+        pitfalls: []
+      }
+    ],
+    notes: [
+      {
+        title: '关于有效期',
+        lines: [
+          '教务处出具的证明文件本身没有固定有效期。',
+          '但接收单位（竞赛、签证、企业等）大多会要求 3 个月或 6 个月内开具的证明，以对方要求为准。'
+        ]
+      }
+    ],
+    sources: [],
+    status: 'draft',
+    verifiedBy: '',
+    verifiedAt: '',
+    updatedAt: '2026-10-14'
+  },
+
+  /* ============================ 场地与设备 ============================ */
+  {
+    id: 'studio-booking',
+    name: '工作室或画室场地借用',
+    category: 'space',
+    aliases: ['工作室借用', '画室借用', '实验室借用', '场地申请', '工作室申请', '设计工场'],
+    keywords: ['工作室', '画室', '场地', '借用', '实验室', '设计工场', '门禁', '钥匙', '安全责任书', '续借'],
+    audience: '艺术与设计学院在读本科生、研究生（外院一般不开放专业画室/工作室）',
+    summary: '线上预约 + 纸质表双渠道，要指导老师和辅导员签字；常规只开到 16:30，严禁过夜。',
+    steps: [
+      {
+        title: '确认你要借的场地归谁管',
+        detail: '可借用场地集中在东风路校区二号楼、四号楼、五号楼和设计工场，包含学生画室、专业工作室、设计工坊、综合材料实验室等，主要用于课程作业、毕设和竞赛创作。公共普通教室单独走教务处的教室借用渠道，和专业画室分开。',
+        materials: [],
+        place: '东风路校区二号楼 / 四号楼 / 五号楼 / 设计工场',
+        duration: '—',
+        pitfalls: ['普通教室不在学院借，要走教务系统，别跑错地方。']
+      },
+      {
+        title: '确认你有没有资格',
+        detail: '优先面向艺术与设计学院在读本科生、研究生；外院学生一般不开放专业画室和工作室。申请大多需要指导老师同意、背书，毕设和竞赛项目优先审批。',
+        materials: [],
+        place: '—',
+        duration: '—',
+        pitfalls: ['外院学生一般借不到专业画室。']
+      },
+      {
+        title: '先打电话问清申请入口，再提交申请并找齐签字',
+        detail: '双渠道并行：线上预约平台 + 学院纸质申请表（长期借用用）。预约平台的准确入口名称、申请表去哪里拿，建议先拨打学院办公室 020-37628060 确认——入口名称会调整，我们写死了反而容易让你找不到。临时短时间借用可以先咨询辅导员。申请表需要指导老师签字、辅导员签字，再报送学院实验中心/学院办公室负责人审批。',
+        materials: ['学院纸质申请表（长期借用）', '指导老师签字', '辅导员签字'],
+        place: '企业微信实验室预约平台 / 学院办公室',
+        duration: '—',
+        pitfalls: ['涉及大型设备的，还要签署实验室安全责任书，提前问清楚。']
+      },
+      {
+        title: '按开放时间使用（常规到 16:30，可申请延长）',
+        detail: '常规开放时间为周一至周五 8:30–16:30；经审批可以延长晚间时段；周末可以申请使用。严禁在画室、工作室过夜留宿，晚上会清场。',
+        materials: [],
+        place: '借用场地',
+        duration: '周一至周五 8:30–16:30，可申请延长',
+        pitfalls: ['严禁过夜留宿，晚上清场。']
+      },
+      {
+        title: '领取钥匙或门禁权限，到期归还',
+        detail: '审批通过后，到学院实验中心办公室领取门禁权限或者钥匙。借用到期当日，归还钥匙、注销临时门禁，现场工作人员检查场地。',
+        materials: [],
+        place: '学院实验中心办公室',
+        duration: '到期当日归还',
+        pitfalls: ['谁使用谁负责：场地、家具、设备损坏或工具丢失，按学院实验室管理规定评估实际损失金额，由借用人承担赔偿。']
+      },
+      {
+        title: '到期前可以申请续借',
+        detail: '短期临时借用一般按天或按周；毕设等长期项目可以申请学期周期。到期前可以提交续借申请，重新走审批流程，审核通过即可续借。',
+        materials: [],
+        place: '学院办公室',
+        duration: '到期前提交',
+        pitfalls: ['正常申请画室、工作室不需要押金；但借用贵重大型加工设备会额外签订安全责任协议。']
+      }
+    ],
+    notes: [
+      {
+        title: '依据与咨询',
+        lines: [
+          '细则以艺术与设计学院实验中心当年最新通知为准。',
+          '可致电学院办公室 020-37628060 咨询。'
+        ]
+      }
+    ],
+    sources: [],
+    status: 'draft',
+    verifiedBy: '',
+    verifiedAt: '',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'classroom-booking',
+    name: '教室借用',
+    category: 'space',
+    aliases: ['借教室', '教室申请', '多媒体教室', '教室借用申请', '借课室'],
+    keywords: ['教室', '借用', '多媒体', '班会', '社团', '活动场地', '申请', '时间冲突'],
+    audience: '需要借用公共教室开展活动的学生组织与社团，以及需要调课、补课的任课教师',
+    summary: '学生组织和社团借教室，要由活动指导教师在教务系统预约，还要在网上办事大厅填活动申请表、经校团委内容审查。',
+    steps: [
+      {
+        title: '先搞清你属于哪一类申请人',
+        detail: '公共教室的借用分三种情况，走的路不一样：① 校内单位借用；② 校内学生组织和学生社团借用；③ 任课教师调课、停课、补课。另外，学院自行维护管理的教室不归本办法管，由各学院另行规定。',
+        materials: [],
+        place: '—',
+        duration: '—',
+        pitfalls: ['公共教室指由教务处安排课堂教学、课室管理中心维护的教室，含普通教室、多媒体教室、智慧教室、公共制图室、公共自习室等。', '教师休息室主要供教师使用，学生不得占用。']
+      },
+      {
+        title: '学生组织与社团：由活动指导教师在教务系统预约',
+        detail: '校内学生组织和学生社团借用公共教室举办活动时，应由活动指导教师登录学校教务管理系统预约需借用的教室，同时在**网上办事大厅**填写学生活动申请表，并按规定完成相应审批手续。',
+        materials: ['学生活动申请表（网上办事大厅填写）'],
+        place: '学校教务管理系统 + 网上办事大厅',
+        duration: '—',
+        pitfalls: ['注意申请主体：是活动指导教师登录系统预约，不是学生自己申请。先找指导老师。']
+      },
+      {
+        title: '校团委会对活动做内容审查和过程监督',
+        detail: '校团委负责对校内学生组织和学生社团在公共教室举办的学生活动进行内容审查和过程监督。',
+        materials: [],
+        place: '校团委',
+        duration: '—',
+        pitfalls: ['活动内容要先过校团委这一关，不要先约教室再报内容。']
+      },
+      {
+        title: '校内单位借用：同样是登录教务系统申请',
+        detail: '校内单位需要借用公共教室举办活动时，应登录学校教务管理系统提交相应申请，并按规定完成相应审批手续。',
+        materials: [],
+        place: '学校教务管理系统',
+        duration: '—',
+        pitfalls: []
+      },
+      {
+        title: '任课教师补课：走教师渠道，不是学生申请',
+        detail: '在公共教室开设的课程，任课教师需要调课、停课或补课时，应登录学校教务管理系统提交相应申请，并按规定完成审批手续。',
+        materials: [],
+        place: '学校教务管理系统',
+        duration: '—',
+        pitfalls: ['补课是老师申请，学生自己申请不了。']
+      },
+      {
+        title: '用多媒体设备：靠校园一卡通授权，不是钥匙',
+        detail: '课堂教学使用多媒体公共教室时，课室管理中心会根据教学计划安排和经批准的调停补课申请单，为使用人的校园一卡通办理多媒体设备的使用授权或变更授权。原则是"谁刷卡，谁负责"。未经批准，教师不得私自为学生活动开启多媒体设备。',
+        materials: ['校园一卡通'],
+        place: '多媒体公共教室',
+        duration: '按授权时段',
+        pitfalls: [
+          '多媒体设备是凭一卡通授权使用的，不是用讲台钥匙开机。',
+          '未经批准不得为学生活动开启多媒体设备。'
+        ]
+      },
+      {
+        title: '教室设备坏了：按教室里张贴的联络电话报修',
+        detail: '发现教学楼和公共教室的设备设施损坏、需要维修时，依照张贴在公共教室和教师休息室里的联络电话，通知课室管理中心。',
+        materials: [],
+        place: '公共教室/教师休息室张贴的联络电话',
+        duration: '—',
+        pitfalls: ['报修电话就贴在教室里，不用到处问。']
+      }
+    ],
+    notes: [
+      {
+        title: '周末与节假日',
+        lines: [
+          '周末可以申请借用。',
+          '法定节假日需要额外从严审批，部分节假日会限制教室开放，以教务处通知为准。'
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: "《广东工业大学公共教室使用管理办法》（课室管理中心，2023-03-28 发布）",
+        url: "https://cmc.gdut.edu.cn/info/1309/1156.htm",
+        note: "2026-10-14 查阅官网原文；申请主体、多媒体授权方式由本文确认"
+      }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  /* ============================ 图书与资源 ============================ */
+  {
+    id: 'library',
+    name: '图书馆借书和找书',
+    category: 'library',
+    aliases: ['借书', '还书', '找书', '续借', '索书号', '图书馆', '研讨间', '座位预约'],
+    keywords: ['图书馆', '借书', '还书', '续借', '索书号', '超期', '违约金', '预约', '委托借书', '研讨间', '藏书', '楼层'],
+    audience: '在校本科生、研究生与教职工',
+    summary: '全日制学生一次可借 30 册、借期 60 天，可续借 1 次（续期 30 天）；丢书按原书价 3 倍赔偿。',
+    steps: [
+      {
+        title: '先在线上检索，拿到索书号',
+        detail: '索书号是图书定位编码，由分类号 + 种次号组成（例如 J2/123）。先在图书馆官网或公众号检索书名，获取索书号和馆藏楼层；馆内大厅和各楼层也设有检索机可以现场查询。',
+        materials: [],
+        place: '图书馆官网 / 图书馆公众号 / 馆内检索机',
+        duration: '几分钟',
+        pitfalls: []
+      },
+      {
+        title: '按索书号到对应楼层找书',
+        detail: '东风路馆楼层分布：1 楼报刊、现刊；2 楼文学、艺术类图书；3 楼社科、历史类；4 楼工业技术、计算机类。拿着索书号到对应楼层，按书架侧面标签上的索书号顺序查找图书。工业设计专业的书主要在 2 楼。',
+        materials: [],
+        place: '东风路校区图书馆对应楼层',
+        duration: '—',
+        pitfalls: ['先在线上查到馆藏楼层再去，直接上楼翻书架很费时间。']
+      },
+      {
+        title: '借书：全日制学生一次可借 30 册',
+        detail: '借阅上限：校内读者中的教职工和全日制学生 30 册；校内其他读者 5 册。外借期限：校内读者 60 天，校外读者 30 天。报纸、期刊只能室内阅览，不外借。',
+        materials: ['本人借阅证 / 校园卡'],
+        place: '图书馆借还台 / 自助借还书设备',
+        duration: '借期 60 天',
+        pitfalls: [
+          '超期须按图书馆规定交纳超期占用费，之后才能继续借书。',
+          '寒暑假期间到期的图书，应在开学后 10 天内归还，否则超期日期从开学第 1 天起算。'
+        ]
+      },
+      {
+        title: '到期前续借：可续 1 次，续期 30 天',
+        detail: '本人所借图书均可续借 1 次，续借时间为 30 天。图书馆规定里没有写是线上办还是到馆办，办理前先问一下总服务台。',
+        materials: [],
+        place: '图书馆总服务台（是否支持线上办理以图书馆公告为准）',
+        duration: '续借后延长 30 天',
+        pitfalls: ['只能续借 1 次，第二次到期就必须还。']
+      },
+      {
+        title: '借不到的书：预约或跨校借',
+        detail: '本校读者可以到所在校区图书馆办理预约借阅，也可以自行在网上办理。每次预约册数上限为：中文图书 5 册、外文图书 5 册。另外，广州大学城十校图书馆之间开通了馆际互借和通借通还服务，适用对象是本校在职教职工和在校全日制学生。',
+        materials: [],
+        place: '图书馆总服务台 / 图书馆官网',
+        duration: '—',
+        pitfalls: ['预约有册数上限：中文 5 册、外文 5 册。']
+      },
+      {
+        title: '书丢了或弄坏了怎么办',
+        detail: '优先购回相同图书；经图书馆同意，也可以购回与原书内容相近的新书。无法购回原书时按下列标准赔偿：普通书刊一般按原书价的 3 倍；中外文工具书按原价 4 倍；内容相同的连续性套书中的一册，按全套图书价格赔偿；中外文期刊单期按全年订价赔偿，合订本按全年订价的 2 倍。',
+        materials: [],
+        place: '图书馆服务台',
+        duration: '—',
+        pitfalls: ['能买到同版本新书归还，通常比直接赔钱便宜得多。', '污损但不影响内容完整的，要负责修复；不能复原的按原价 50% 赔偿。']
+      }
+    ],
+    notes: [
+      {
+        title: '东风路校区图书馆开放时间（周一至周日）',
+        lines: [
+          '图书馆开馆、阅览区、自修室：7:30–22:30',
+          '总服务台：8:30–12:00、13:30–22:00',
+          '借阅区（人文、自然、样本、工具）：8:30–12:00、13:30–22:00',
+          '自助借还机、信息共享空间：8:30–12:00、13:30–22:00',
+          '节假日假期开放时间另行通知。想早点去自习，7:30 就能进馆；但要借书或找人办事，得等 8:30 总服务台开门。'
+        ]
+      },
+      {
+        title: '东风路馆藏书楼层分布（尚未核实到官方依据）',
+        lines: [
+          '以下楼层分布来自早期整理，没有在图书馆官网找到依据，请以馆内指示牌为准：',
+          '1 楼：报刊、现刊',
+          '2 楼：文学、艺术类图书（工业设计专业主要在这一层）',
+          '3 楼：社科、历史类',
+          '4 楼：工业技术、计算机类'
+        ]
+      },
+      {
+        title: '座位与研讨间预约',
+        lines: [
+          '自习座位：图书馆公众号的座位预约系统线上预约。',
+          '研讨间：在图书馆服务台或线上系统提交预约，一般需要学生团队、学习项目用途，部分研讨间需要提前登记。'
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: "《图书馆读者借阅管理规定》（2021-08-26 起实施）",
+        url: "https://library.gdut.edu.cn/info/1132/1081.htm",
+        note: "2026-10-14 查阅官网原文；借阅册数表格与赔偿标准由本文确认"
+      },
+      {
+        label: "广东工业大学图书馆《开放时间》",
+        url: "https://library.gdut.edu.cn/bggk/kfsj.htm",
+        note: "2026-10-14 查阅官网时间表（图片），东风路校区各行开放时间已录入"
+      }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  /* ======================== 报修与后勤 ========================
+   * 以下 4 条流程的信息来自学校发放的《校园生活服务指南》。
+   * 公开页面上只收录部门/科室的对外服务电话，以及以岗位名义公布的服务热线；
+   * 带具体姓名与职务的个人手机号不上公开页面，完整名单见
+   * docs/后勤联系号码（团队内部参考）.md
+   * ========================================================== */
+  {
+    id: 'dorm-repair',
+    name: '宿舍报修',
+    category: 'service',
+    aliases: ['宿舍报修', '报修', '修灯', '修门', '空调维修', '热水报修', '下水道堵了', '厕所堵了'],
+    keywords: ['宿舍', '报修', '灯管', '门', '风扇', '空调', '热水', '花洒', '水管', '水表', '下水道', '厕所', '堵塞', '洗衣机', '冰箱', '维修'],
+    audience: '在校住宿学生',
+    summary: '宿舍报修分四种情况走四条不同的路：楼内固定资产、空调、热水设备、个人电器——找错地方会白等。',
+    steps: [
+      {
+        title: '先判断你要修的是哪一类',
+        detail: '宿舍报修分四类，处理渠道完全不同：① 宿舍楼内固定资产（灯管、门等）；② 空调；③ 热水相关设备（浴室花洒、水管、水表等）；④ 个人电器（洗衣机、冰箱等）。分类搞错，报修会一直没人来处理。',
+        materials: [],
+        place: '—',
+        duration: '—',
+        pitfalls: [
+          '风扇不在维修范围内，填了报修单也不会受理。',
+          '个人电器（洗衣机、冰箱等）学校不负责，要自己找维修人员。'
+        ]
+      },
+      {
+        title: '楼内固定资产：到宿舍楼下保安处填报修单',
+        detail: '宿舍楼内的固定资产（灯管、门等）维修，到宿舍楼下保安处填写报修单即可，免费。',
+        materials: [],
+        place: '宿舍楼下保安处',
+        duration: '免费，受理后按后勤排期上门',
+        pitfalls: ['风扇不在维修范围内。']
+      },
+      {
+        title: '空调维修：致电 37626199',
+        detail: '空调维修致电 37626199，需要提供房号、姓名、联系电话和问题描述。维修和清洗都不收费。',
+        materials: ['房号', '姓名', '联系电话', '问题描述'],
+        place: '电话报修：37626199',
+        duration: '维修、清洗均不收费',
+        pitfalls: ['打电话前把房号和问题描述准备好，信息不全会影响派工。']
+      },
+      {
+        title: '热水设备：用「趣联」App 报修',
+        detail: '浴室花洒、水管、水表等热水相关设备，可在「趣联」App 中依次点击「我的 - 服务中心 - 故障报修」提交报修；也可以直接咨询客服 18924029446。',
+        materials: [],
+        place: '「趣联」App / 客服 18924029446',
+        duration: '—',
+        pitfalls: ['长时间没人来处理，不要一直等，直接拨打投诉电话 020-82514243。']
+      },
+      {
+        title: '报修长期没反馈：找本班生活委员',
+        detail: '如果报修长期没有反馈，请与本班生活委员反馈，由生活委员向上反映。',
+        materials: [],
+        place: '本班生活委员',
+        duration: '—',
+        pitfalls: []
+      }
+    ],
+    notes: [
+      {
+        title: '其他宿舍相关电话',
+        lines: [
+          '土木、水电报修：37626199',
+          '24 小时水电应急（物业公司）：37626199',
+          '宿舍监管办公室（宿舍 8 栋 1 楼 111 室）：37628267',
+          '能源办（工作日）：37628316'
+        ]
+      }
+    ],
+    sources: [
+      { label: '校园生活服务指南（学校发放）', url: '', note: '2026-10-14 团队成员提供' }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'campus-repair',
+    name: '教学区报修',
+    category: 'service',
+    aliases: ['教学区报修', '教室报修', '教学楼维修', '公共设施报修', '修风扇'],
+    keywords: ['教学区', '报修', '教室', '教学楼', '灯管', '风扇', '绿化', '蚊虫', '厕所', '公共设施', '物业'],
+    audience: '在教学区遇到设施问题的学生',
+    summary: '先找本楼栋保安；公共环境设施问题（灯管、风扇、绿化、蚊虫、厕所等）反馈给物业公司。',
+    steps: [
+      {
+        title: '先咨询对应楼栋楼下保安',
+        detail: '教学区的设施问题，先找对应楼栋楼下的保安。',
+        materials: [],
+        place: '对应楼栋楼下保安',
+        duration: '—',
+        pitfalls: []
+      },
+      {
+        title: '没找到保安或没解决：找本班生活委员',
+        detail: '如果未找到保安，或者保安没能解决，请与本班生活委员反馈。',
+        materials: [],
+        place: '本班生活委员',
+        duration: '—',
+        pitfalls: []
+      },
+      {
+        title: '公共环境设施问题：反馈给物业公司',
+        detail: '教学区与生活区的公共环境设施问题——如灯管、风扇、绿化、蚊虫、厕所等——可以反馈给物业公司统一处理。',
+        materials: [],
+        place: '物业公司',
+        duration: '—',
+        pitfalls: []
+      }
+    ],
+    notes: [
+      {
+        title: '物业联系方式',
+        lines: [
+          '物业办公室（南北院急修）：020-37626199',
+          '如需联系物业管理人员，可向本班生活委员或楼下保安索取，本站不公开个人手机号。'
+        ]
+      }
+    ],
+    sources: [
+      { label: '校园生活服务指南（学校发放）', url: '', note: '2026-10-14 团队成员提供' }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'life-service',
+    name: '生活服务电话（送水、网络、电费、校医院）',
+    category: 'service',
+    aliases: ['送水', '订水', '网络报修', '校园网', '电费', '充电费', '校医院', '看病', '急诊'],
+    keywords: ['送水', '订水', '网络', '校园网', '故障', '电费', '充值', '校医院', '急诊', '看病', '生活服务'],
+    audience: '在校学生',
+    summary: '送水、网络故障、电费充值、校医院——四个最常打的服务电话，以及各自的时间限制。',
+    steps: [
+      {
+        title: '校医院：办公室和急诊部是两个号码',
+        detail: '校医院办公室 37626966；急诊部 37626875。身体不适或夜间突发情况直接打急诊部，不要打办公室。',
+        materials: [],
+        place: '校医院办公室 37626966 / 急诊部 37626875',
+        duration: '—',
+        pitfalls: ['急诊和办公室是两个号码，紧急情况直接打急诊部。']
+      },
+      {
+        title: '送水服务',
+        detail: '送水服务：37626362 或 18218224330；也可以通过微信小程序咨询下单。',
+        materials: [],
+        place: '37626362 / 18218224330 / 微信小程序',
+        duration: '—',
+        pitfalls: []
+      },
+      {
+        title: '网络故障报修',
+        detail: '网络故障报修：37626336。',
+        materials: [],
+        place: '37626336',
+        duration: '—',
+        pitfalls: []
+      },
+      {
+        title: '电费充值与咨询',
+        detail: '电费充值、电费问题咨询：能源办 020-37628316。',
+        materials: [],
+        place: '能源办 020-37628316',
+        duration: '仅工作日有人',
+        pitfalls: ['能源办只有工作日有人，周末遇到充值问题只能等工作日处理。']
+      }
+    ],
+    notes: [],
+    sources: [
+      { label: '校园生活服务指南（学校发放）', url: '', note: '2026-10-14 团队成员提供' }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  },
+
+  {
+    id: 'emergency',
+    name: '紧急与安全联系方式',
+    category: 'service',
+    aliases: ['保卫处', '紧急电话', '安全', '报警', '校园110', '电梯困人', '漏水', '跳闸'],
+    keywords: ['保卫处', '紧急', '安全', '报警', '治安', '应急', '110', '电梯', '困人', '漏水', '跳闸', '停电'],
+    audience: '全体在校学生',
+    summary: '遇到治安或人身安全情况先打保卫处；水电类紧急情况打 24 小时应急电话。建议存进手机通讯录。',
+    steps: [
+      {
+        title: '治安、人身安全类紧急情况：保卫处 37626036',
+        detail: '遇到治安问题、人身安全威胁或其他紧急情况，第一时间拨打保卫处电话 37626036。驻校民警的联系方式可以向保卫处索取。',
+        materials: [],
+        place: '保卫处 37626036',
+        duration: '—',
+        pitfalls: ['情况紧急时先保证自身安全并离开现场，再联系保卫处；危及生命直接拨 110。']
+      },
+      {
+        title: '水电类紧急情况：24 小时应急电话 37626199',
+        detail: '漏水、跳闸、停电等水电类紧急情况，拨打 24 小时水电应急电话 37626199（物业公司）。',
+        materials: [],
+        place: '24 小时水电应急 37626199',
+        duration: '24 小时',
+        pitfalls: []
+      },
+      {
+        title: '电梯故障或被困',
+        detail: '电梯故障或被困在电梯里，拨打电梯工电话 13728064677；夜间紧急维修 18344584612。',
+        materials: [],
+        place: '电梯工 13728064677 / 夜班维修 18344584612',
+        duration: '—',
+        pitfalls: ['被困电梯时不要强行扒门，先按轿厢内警铃再打电话。']
+      }
+    ],
+    notes: [
+      {
+        title: '建议提前存号',
+        lines: [
+          '保卫处 37626036、24 小时水电应急 37626199 建议直接存进手机通讯录。',
+          '需要联系驻校民警或物业具体负责人时，可拨打保卫处或物业办公室电话索取。'
+        ]
+      }
+    ],
+    sources: [
+      { label: '校园生活服务指南（学校发放）', url: '', note: '2026-10-14 团队成员提供' }
+    ],
+    status: 'verified',
+    verifiedBy: '团队成员',
+    verifiedAt: '2026-10-14',
+    updatedAt: '2026-10-14'
+  }
+];
+
+/* 说明：这里曾有一条「演示样例：校园卡补办」，用于在真实内容录入前展示界面效果。
+ * 9 条真实流程录入完成后已删除——一个虚构的办事流程留在成品里是纯粹的负债。 */
+</script>
+<script>
+/* 工大办事通 · 应用逻辑
+ * 零依赖、无后端、无网络请求。
+ * 结构：路由 → 页面渲染 → 检索算法 → 分享导出
+ */
+(function () {
+  'use strict';
+
+  var SITE = window.SITE || {};
+  var FLOWS = (window.FLOWS || []).slice();
+  var CATS = window.FLOW_CATEGORIES || [];
+  var NEED_FIELDS = window.NEED_FIELDS || [];
+
+  var main = document.getElementById('main');
+  var state = { q: '' };
+
+  /* ---------------- 工具 ---------------- */
+
+  function $(sel, root) { return (root || document).querySelector(sel); }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  var store = {
+    get: function (k, d) {
+      try { var v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); }
+      catch (e) { return d; }
+    },
+    set: function (k, v) {
+      try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 隐私模式忽略 */ }
+    }
+  };
+
+  function byId(id) {
+    for (var i = 0; i < FLOWS.length; i++) if (FLOWS[i].id === id) return FLOWS[i];
+    return null;
+  }
+
+  function catName(id) {
+    for (var i = 0; i < CATS.length; i++) if (CATS[i].id === id) return CATS[i].name;
+    return id === 'demo' ? '演示样例' : '其他';
+  }
+
+  function statusBadge(flow) {
+    if (flow.status === 'verified') return '<span class="badge badge-verified">已核实</span>';
+    if (flow.status === 'demo') return '<span class="badge badge-demo">演示样例 · 非真实流程</span>';
+    // 内容已录入但来源还没登记完：如实区分，不要和"完全没内容"混成一句
+    if (stepCount(flow)) return '<span class="badge badge-draft">内容已录入 · 来源核实中</span>';
+    return '<span class="badge badge-draft">内容核实中</span>';
+  }
+
+  function stepCount(flow) { return (flow.steps || []).length; }
+
+  function cardMeta(flow) {
+    return '<span class="badge badge-plain">' + catName(flow.category) + '</span>' +
+      (stepCount(flow) ? '<span class="badge badge-plain">' + stepCount(flow) + ' 步</span>' : '') +
+      statusBadge(flow);
+  }
+
+  /* ---------------- 检索算法 ----------------
+   * 全中文、可解释、不依赖任何分词库。
+   * 步骤：归一化 → 逐字段加权命中 → 二元组（bigram）相似度兜底 → 排序
+   */
+
+  function normalize(s) {
+    return String(s == null ? '' : s)
+      .toLowerCase()
+      // 全角转半角
+      .replace(/[\uFF01-\uFF5E]/g, function (c) {
+        return String.fromCharCode(c.charCodeAt(0) - 0xFEE0);
+      })
+      .replace(/[\s\u3000]+/g, '')
+      .replace(/[，。、；：？！""''（）《》【】·,.;:?!"'()\[\]<>_\-\/\\|~`@#$%^&*+=]/g, '');
+  }
+
+  function bigrams(s) {
+    var set = {};
+    if (s.length === 1) { set[s] = 1; return set; }
+    for (var i = 0; i < s.length - 1; i++) set[s.slice(i, i + 2)] = 1;
+    return set;
+  }
+
+  function flowHaystack(flow) {
+    var parts = [flow.name];
+    parts = parts.concat(flow.aliases || [], flow.keywords || [], [flow.summary || '']);
+    (flow.steps || []).forEach(function (st) {
+      parts.push(st.title || '', st.detail || '', st.place || '');
+      (st.materials || []).forEach(function (m) { parts.push(m); });
+    });
+    return normalize(parts.join('|'));
+  }
+
+  function scoreFlow(flow, rawQuery) {
+    var q = normalize(rawQuery);
+    if (!q) return null;
+
+    var score = 0;
+    var why = [];
+    var name = normalize(flow.name);
+
+    if (name === q) { score += 100; why.push('流程名完全一致'); }
+    else if (name.indexOf(q) >= 0) { score += 55; why.push('流程名包含「' + rawQuery + '」'); }
+    else if (q.indexOf(name) >= 0 && name.length >= 3) { score += 35; why.push('流程名被你的描述包含'); }
+
+    (flow.aliases || []).forEach(function (a) {
+      var na = normalize(a);
+      if (na === q) { score += 50; why.push('口语说法「' + a + '」'); }
+      else if (na.indexOf(q) >= 0 || (q.length >= 2 && q.indexOf(na) >= 0)) { score += 28; why.push('口语说法「' + a + '」'); }
+    });
+
+    (flow.keywords || []).forEach(function (k) {
+      var nk = normalize(k);
+      if (nk.indexOf(q) >= 0 || (q.length >= 2 && q.indexOf(nk) >= 0)) { score += 16; why.push('关键词「' + k + '」'); }
+    });
+
+    (flow.steps || []).forEach(function (st) {
+      var t = normalize((st.title || '') + (st.detail || ''));
+      if (t.indexOf(q) >= 0) { score += 7; why.push('出现在步骤「' + (st.title || '') + '」'); }
+    });
+
+    // 二元组相似度兜底：处理错字、语序不同、多余修饰
+    var qb = bigrams(q);
+    var hb = bigrams(flowHaystack(flow));
+    var hit = 0, total = 0;
+    for (var g in qb) { if (!Object.prototype.hasOwnProperty.call(qb, g)) continue; total++; if (hb[g]) hit++; }
+    var ratio = total ? hit / total : 0;
+    if (ratio > 0.34) { score += Math.round(ratio * 14); why.push('文字相近（匹配度 ' + Math.round(ratio * 100) + '%）'); }
+
+    if (score <= 0) return null;
+
+    var uniq = [];
+    why.forEach(function (w) { if (uniq.indexOf(w) < 0) uniq.push(w); });
+    return { flow: flow, score: score, why: uniq.slice(0, 3) };
+  }
+
+  function search(rawQuery) {
+    return FLOWS
+      .map(function (f) { return scoreFlow(f, rawQuery); })
+      .filter(Boolean)
+      .sort(function (a, b) { return b.score - a.score; })
+      .slice(0, 5);
+  }
+
+  /* ---------------- 首页 ---------------- */
+
+  function heroHTML() {
+    var verified = FLOWS.filter(function (f) { return f.status === 'verified'; }).length;
+    return '' +
+      '<section class="hero">' +
+      '<h1>办事之前，先看一眼这条路怎么走</h1>' +
+      '<p class="lead">把 ' + esc(SITE.school || '') + esc(SITE.campus || '') + ' 的高频办事流程，拆成可以一步步跟着走的步骤：' +
+      '要带什么材料、去哪办、多久办完、为什么会被退回。</p>' +
+      '<div class="stats">' +
+      '<div class="stat"><b>' + FLOWS.length + '</b><span>条办事流程</span></div>' +
+      '<div class="stat"><b>' + verified + '</b><span>条已完成核实</span></div>' +
+      '<div class="stat"><b>0</b><span>个账号 / 不收集个人信息</span></div>' +
+      '</div>' +
+      '</section>';
+  }
+
+  function searchHTML() {
+    var chips = ['转专业', '成绩单', '借教室', '缓考', '奖学金', '盖章', '图书馆'];
+    return '' +
+      '<section class="search">' +
+      '<input id="q" type="search" autocomplete="off" placeholder="你要办什么事？例如：学生证丢了 / 想转专业 / 打印成绩单" ' +
+      'value="' + esc(state.q) + '" aria-label="搜索办事流程">' +
+      '<button class="go" id="go" type="button" aria-label="搜索">→</button>' +
+      '</section>' +
+      '<p class="hint">支持口语说法，例如「卡丢了」「怎么借教室」。</p>' +
+      '<div class="chips">' + chips.map(function (c) {
+        return '<button class="chip" type="button" data-q="' + esc(c) + '">' + esc(c) + '</button>';
+      }).join('') + '</div>';
+  }
+
+  function recentHTML() {
+    var ids = store.get('bt.recent', []);
+    var items = ids.map(byId).filter(Boolean);
+    if (!items.length) return '';
+    return '<h2>刚才看过</h2><div class="grid">' + items.map(flowCardHTML).join('') + '</div>';
+  }
+
+  function flowCardHTML(flow) {
+    var desc = flow.summary || '这条流程的办理条件、材料、地点和时限正在核实中。';
+    return '<a class="flow-card" href="#/f/' + esc(flow.id) + '">' +
+      '<h3>' + esc(flow.name) + '</h3>' +
+      '<p>' + esc(desc) + '</p>' +
+      '<div class="meta">' + cardMeta(flow) + '</div>' +
+      '</a>';
+  }
+
+  function categoryHTML() {
+    var out = '';
+    CATS.forEach(function (cat) {
+      var list = FLOWS.filter(function (f) { return f.category === cat.id; });
+      if (!list.length) return;
+      out += '<h2>' + esc(cat.name) + '</h2><div class="grid">' + list.map(flowCardHTML).join('') + '</div>';
+    });
+    return out;
+  }
+
+  function resultsHTML(q) {
+    var res = search(q);
+    if (!res.length) {
+      return '<div class="empty">' +
+        '<h3>没有找到「' + esc(q) + '」</h3>' +
+        '<p class="muted">换一种说法试试，比如只说动词和对象：转专业、成绩单、借教室。</p>' +
+        '<p class="muted">也可能是这条流程还没有被收录。目前收录范围：' + esc(SITE.scope || '') + '。</p>' +
+        '</div>';
+    }
+    return '<h2>找到 ' + res.length + ' 条相关流程</h2><div class="grid">' +
+      res.map(function (r) {
+        return '<a class="flow-card result" href="#/f/' + esc(r.flow.id) + '">' +
+          '<h3>' + esc(r.flow.name) + '</h3>' +
+          '<p class="why">因为：' + esc(r.why.join(' · ')) + '</p>' +
+          '<div class="meta">' + cardMeta(r.flow) + '</div>' +
+          '</a>';
+      }).join('') + '</div>';
+  }
+
+  function panelHTML() {
+    if (state.q.trim()) return resultsHTML(state.q.trim());
+    return recentHTML() + categoryHTML();
+  }
+
+  function renderHome() {
+    main.innerHTML = heroHTML() + searchHTML() + '<div id="panel">' + panelHTML() + '</div>';
+    var input = $('#q');
+    var panel = $('#panel');
+
+    function refresh() {
+      state.q = input.value;
+      panel.innerHTML = panelHTML();
+    }
+
+    input.addEventListener('input', refresh);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') refresh(); });
+    $('#go').addEventListener('click', refresh);
+    document.querySelectorAll('.chip').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        input.value = btn.getAttribute('data-q');
+        refresh();
+        input.focus();
+      });
+    });
+  }
+
+  /* ---------------- 详情页 ---------------- */
+
+  function stepHTML(step, i, flowId) {
+    var mats = '';
+    if (step.materials && step.materials.length) {
+      mats = '<ul class="mats">' + step.materials.map(function (m, mi) {
+        var key = 'bt.mat.' + flowId + '.' + i + '.' + mi;
+        var checked = store.get(key, false) ? ' checked' : '';
+        var id = 'm' + i + '_' + mi;
+        return '<li><input type="checkbox" id="' + id + '" data-mat="' + esc(key) + '"' + checked + '>' +
+          '<label for="' + id + '">' + esc(m) + '</label></li>';
+      }).join('') + '</ul>';
+    }
+
+    var facts = '';
+    if (step.place || step.duration) {
+      facts = '<div class="facts">' +
+        (step.place ? '<div class="fact"><b>办理地点</b><span>' + esc(step.place) + '</span></div>' : '') +
+        (step.duration ? '<div class="fact"><b>所需时间</b><span>' + esc(step.duration) + '</span></div>' : '') +
+        '</div>';
+    }
+
+    var pit = '';
+    if (step.pitfalls && step.pitfalls.length) {
+      pit = '<div class="pitfall"><b>容易被退回的地方</b>' +
+        step.pitfalls.map(esc).join('<br>') + '</div>';
+    }
+
+    return '<li class="step" data-n="' + (i + 1) + '">' +
+      '<div class="step-body">' +
+      '<h3>' + esc(step.title) + '</h3>' +
+      (step.detail ? '<p>' + esc(step.detail) + '</p>' : '') +
+      facts + mats + pit +
+      '</div></li>';
+  }
+
+  function draftPanelHTML() {
+    return '<div class="empty">' +
+      '<h3>这条流程正在核实中</h3>' +
+      '<p class="muted">我们只写有来源的步骤。在向学校官方渠道确认之前，这里不会给出具体信息，避免你按错的信息白跑一趟。</p>' +
+      '<ul class="needlist">' + NEED_FIELDS.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>' +
+      '</div>';
+  }
+
+  function notesHTML(flow) {
+    if (!flow.notes || !flow.notes.length) return '';
+    return '<h2>补充信息</h2>' + flow.notes.map(function (n) {
+      return '<div class="note-card">' +
+        '<h3>' + esc(n.title || '') + '</h3>' +
+        '<ul class="notelist">' +
+        (n.lines || []).map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') +
+        '</ul></div>';
+    }).join('');
+  }
+
+  function sourcesHTML(flow) {
+    if (!flow.sources || !flow.sources.length) {
+      var msg = (stepCount(flow) && window.NEEDS_SOURCE)
+        ? window.NEEDS_SOURCE
+        : '尚未登记来源。核实完成后，每一条流程都会附上信息来源与核实时间。';
+      return '<p class="muted">' + esc(msg) + '</p>';
+    }
+    return '<ul class="sources">' + flow.sources.map(function (s) {
+      var label = esc(s.label || '来源');
+      var text = s.url ? '<a href="' + esc(s.url) + '" rel="noopener">' + label + '</a>' : label;
+      return '<li>' + text + (s.note ? '<br><span class="muted">' + esc(s.note) + '</span>' : '') + '</li>';
+    }).join('') + '</ul>';
+  }
+
+  function renderFlow(id) {
+    var flow = byId(id);
+    if (!flow) {
+      main.innerHTML = '<a class="back" href="#/">← 返回流程列表</a>' +
+        '<div class="empty"><h3>没有这条流程</h3><p class="muted">它可能已经被重命名或移除。</p></div>';
+      return;
+    }
+
+    // 记录"刚才看过"
+    var recent = store.get('bt.recent', []).filter(function (x) { return x !== flow.id; });
+    recent.unshift(flow.id);
+    store.set('bt.recent', recent.slice(0, 4));
+
+    var stepsHTML = stepCount(flow)
+      ? '<ol class="steps">' + flow.steps.map(function (s, i) { return stepHTML(s, i, flow.id); }).join('') + '</ol>'
+      : draftPanelHTML();
+
+    var verifyLine = flow.status === 'verified'
+      ? '核实人：' + esc(flow.verifiedBy || '—') + '　核实时间：' + esc(flow.verifiedAt || '—')
+      : (flow.status === 'demo' ? '演示样例，无真实核实信息' : '尚未核实');
+
+    main.innerHTML = '' +
+      '<a class="back" href="#/">← 返回流程列表</a>' +
+      '<div class="detail-head">' +
+      '<div class="row">' + statusBadge(flow) +
+      '<span class="badge badge-plain">' + esc(catName(flow.category)) + '</span>' +
+      (stepCount(flow) ? '<span class="badge badge-plain">' + stepCount(flow) + ' 步</span>' : '') +
+      '</div>' +
+      '<h1>' + esc(flow.name) + '</h1>' +
+      (flow.summary ? '<p class="lead">' + esc(flow.summary) + '</p>' : '') +
+      '<dl class="kv">' +
+      '<dt>适用对象</dt><dd>' + esc(flow.audience || '待核实') + '</dd>' +
+      '<dt>其他说法</dt><dd>' + esc((flow.aliases || []).join('、') || '—') + '</dd>' +
+      '<dt>核实状态</dt><dd>' + verifyLine + '</dd>' +
+      '</dl>' +
+      '</div>' +
+      stepsHTML +
+      notesHTML(flow) +
+      '<div class="actions">' +
+      '<button class="btn btn-primary" id="dl" type="button">下载流程长图</button>' +
+      '<button class="btn" id="copy" type="button">复制文字版</button>' +
+      '<button class="btn" id="print" type="button">打印 / 存成 PDF</button>' +
+      '</div>' +
+      '<div class="notice"><b>办事之前请再确认一次</b>' +
+      '校园流程会变。这里的内容最后更新于 ' + esc(flow.updatedAt || '—') +
+      '，请以学校官网、学院通知或办事窗口的答复为准。</div>' +
+      '<h2>信息来源</h2>' + sourcesHTML(flow);
+
+    document.querySelectorAll('.mats input').forEach(function (box) {
+      box.addEventListener('change', function () {
+        store.set(box.getAttribute('data-mat'), box.checked);
+      });
+    });
+
+    document.getElementById('dl').addEventListener('click', function () { downloadImage(flow); });
+    document.getElementById('copy').addEventListener('click', function (e) { copyText(flow, e.target); });
+    document.getElementById('print').addEventListener('click', function () { window.print(); });
+  }
+
+  /* ---------------- 分享：长图 ---------------- */
+
+  var FONT = '"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Noto Sans SC",system-ui,sans-serif';
+
+  function setFont(ctx, size, weight) { ctx.font = (weight || 400) + ' ' + size + 'px ' + FONT; }
+
+  function wrapText(ctx, text, maxWidth) {
+    var lines = [];
+    var line = '';
+    var chars = String(text == null ? '' : text).split('');
+    for (var i = 0; i < chars.length; i++) {
+      var ch = chars[i];
+      if (ch === '\n') { lines.push(line); line = ''; continue; }
+      var test = line + ch;
+      if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line = ch; }
+      else { line = test; }
+    }
+    lines.push(line);
+    return lines;
+  }
+
+  /* 同一套布局逻辑跑两遍：先量高度，再真正绘制 */
+  function layoutCard(ctx, flow, paint) {
+    var W = 900, PAD = 56, x = PAD, maxW = W - PAD * 2;
+    var y = 0;
+
+    // 顶部色块
+    var headH = 168;
+    if (paint) {
+      var g = ctx.createLinearGradient(0, 0, W, headH);
+      g.addColorStop(0, '#17457a');
+      g.addColorStop(1, '#0e3059');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, headH);
+      ctx.fillStyle = 'rgba(255,255,255,.72)';
+      setFont(ctx, 20, 400);
+      ctx.fillText((SITE.school || '') + ' ' + (SITE.campus || ''), x, 52);
+      ctx.fillStyle = '#ffffff';
+      setFont(ctx, 38, 700);
+      var titleLines = wrapText(ctx, flow.name, maxW);
+      var ty = 104;
+      titleLines.slice(0, 2).forEach(function (ln) { ctx.fillText(ln, x, ty); ty += 46; });
+    }
+    y = headH;
+
+    if (paint) { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, 4000); }
+    y += 52;
+
+    // 状态行
+    var statusText = flow.status === 'verified' ? '已核实 · ' + (flow.verifiedAt || '')
+      : flow.status === 'demo' ? '演示样例 · 非真实流程'
+        : '内容核实中 · 请以学校通知为准';
+    if (paint) {
+      setFont(ctx, 20, 400);
+      ctx.fillStyle = flow.status === 'verified' ? '#1b6e4a' : '#c8791a';
+      ctx.fillText(statusText, x, y);
+    }
+    y += 40;
+
+    // 适用对象
+    if (flow.audience) {
+      setFont(ctx, 22, 400);
+      if (paint) {
+        ctx.fillStyle = '#59616e';
+        wrapText(ctx, '适用对象：' + flow.audience, maxW).forEach(function (ln) {
+          ctx.fillText(ln, x, y); y += 32;
+        });
+      } else {
+        y += wrapText(ctx, '适用对象：' + flow.audience, maxW).length * 32;
+      }
+      y += 14;
+    }
+
+    // 步骤
+    var steps = flow.steps || [];
+    if (!steps.length) {
+      setFont(ctx, 24, 400);
+      var emptyLines = wrapText(ctx, '这条流程的办理条件、所需材料、办理地点与时间正在核实中。核实完成前不给出具体信息。', maxW - 10);
+      if (paint) {
+        ctx.fillStyle = '#59616e';
+        emptyLines.forEach(function (ln) { ctx.fillText(ln, x, y); y += 36; });
+      } else { y += emptyLines.length * 36; }
+      y += 20;
+    }
+
+    steps.forEach(function (st, i) {
+      var top = y;
+      // 序号圆点
+      if (paint) {
+        ctx.beginPath();
+        ctx.arc(x + 17, top + 12, 17, 0, Math.PI * 2);
+        ctx.fillStyle = '#17457a';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        setFont(ctx, 20, 700);
+        ctx.textAlign = 'center';
+        ctx.fillText(String(i + 1), x + 17, top + 19);
+        ctx.textAlign = 'left';
+      }
+
+      var tx = x + 50;
+      var tw = W - PAD - tx;
+      setFont(ctx, 26, 700);
+      var tl = wrapText(ctx, st.title || '', tw);
+      if (paint) { ctx.fillStyle = '#15181d'; tl.forEach(function (ln) { ctx.fillText(ln, tx, y + 20); }); }
+      y += tl.length * 36;
+
+      if (st.detail) {
+        setFont(ctx, 21, 400);
+        var dl = wrapText(ctx, st.detail, tw);
+        if (paint) { ctx.fillStyle = '#59616e'; dl.forEach(function (ln) { ctx.fillText(ln, tx, y + 14); }); }
+        y += dl.length * 31;
+      }
+
+      if (st.place || st.duration) {
+        setFont(ctx, 20, 400);
+        var meta = [st.place ? '地点：' + st.place : '', st.duration ? '时间：' + st.duration : '']
+          .filter(Boolean).join('　');
+        var ml = wrapText(ctx, meta, tw);
+        if (paint) { ctx.fillStyle = '#868e9c'; ml.forEach(function (ln) { ctx.fillText(ln, tx, y + 12); }); }
+        y += ml.length * 30;
+      }
+
+      if (st.pitfalls && st.pitfalls.length) {
+        setFont(ctx, 20, 400);
+        var pt = wrapText(ctx, '注意：' + st.pitfalls.join('；'), tw);
+        if (paint) { ctx.fillStyle = '#a8481b'; pt.forEach(function (ln) { ctx.fillText(ln, tx, y + 12); }); }
+        y += pt.length * 30;
+      }
+
+      y += 30;
+    });
+
+    // 底部
+    setFont(ctx, 19, 400);
+    var footLines = wrapText(ctx,
+      '内容更新于 ' + (flow.updatedAt || '') + '　·　请以学校官方通知为准　·　生成时间 ' +
+      new Date().toLocaleString('zh-CN'), maxW);
+    y += 24;
+    if (paint) {
+      ctx.fillStyle = '#868e9c';
+      footLines.forEach(function (ln) { ctx.fillText(ln, x, y); y += 28; });
+      ctx.strokeStyle = '#e2e5eb';
+      ctx.beginPath(); ctx.moveTo(x, 22 + headH); ctx.lineTo(W - PAD, 22 + headH); ctx.stroke();
+    } else { y += footLines.length * 28; }
+
+    return y + PAD;
+  }
+
+  function downloadImage(flow) {
+    var probe = document.createElement('canvas').getContext('2d');
+    var h = layoutCard(probe, flow, false);
+
+    var canvas = document.createElement('canvas');
+    canvas.width = 900;
+    canvas.height = Math.max(h, 400);
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.textBaseline = 'alphabetic';
+    layoutCard(ctx, flow, true);
+
+    var a = document.createElement('a');
+    a.download = (SITE.name || 'flow') + '-' + flow.name + '.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  }
+
+  /* ---------------- 分享：文字版 ---------------- */
+
+  function flowToText(flow) {
+    var out = ['【' + flow.name + '】'];
+    if (SITE.school) out.push(SITE.school + (SITE.campus ? ' ' + SITE.campus : ''));
+    if (flow.status === 'draft') out.push('（信息来源核实中，请以学校通知为准）');
+    if (flow.status === 'demo') out.push('（演示样例，非真实流程）');
+    out.push('');
+    if (flow.audience) out.push('适用对象：' + flow.audience);
+    if (flow.summary) out.push(flow.summary);
+    out.push('');
+    (flow.steps || []).forEach(function (s, i) {
+      out.push((i + 1) + '. ' + s.title);
+      if (s.detail) out.push('   ' + s.detail);
+      if (s.materials && s.materials.length) out.push('   材料：' + s.materials.join('、'));
+      if (s.place) out.push('   地点：' + s.place);
+      if (s.duration) out.push('   时间：' + s.duration);
+      if (s.pitfalls && s.pitfalls.length) out.push('   注意：' + s.pitfalls.join('；'));
+      out.push('');
+    });
+    (flow.notes || []).forEach(function (n) {
+      out.push('【' + (n.title || '') + '】');
+      (n.lines || []).forEach(function (l) { out.push('  ' + l); });
+      out.push('');
+    });
+    out.push('内容更新：' + (flow.updatedAt || '') + '　请以学校官方通知为准');
+    return out.join('\n');
+  }
+
+  function copyText(flow, btn) {
+    var text = flowToText(flow);
+    function done(ok) {
+      var old = btn.textContent;
+      btn.textContent = ok ? '已复制 ✓' : '复制失败，请手动选择';
+      setTimeout(function () { btn.textContent = old; }, 1800);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(true); } catch (e) { done(false); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  /* ---------------- 关于页 ---------------- */
+
+  function feedbackHTML() {
+    var fb = SITE.feedback || {};
+    var email = String(fb.email || '').trim();
+    var tpl = '哪条流程：\n哪一步不对：\n你实际遇到的情况：';
+
+    var out = '<p>如果你发现某条流程与现实不符，或者知道一条应该被收录的流程，欢迎告诉我们。' +
+      '我们尤其想知道<b>「照着做会白跑一趟」</b>的地方——这类信息只有真正办过的人知道。</p>';
+
+    if (email) {
+      out += '<p>' + esc(fb.label || '纠错邮箱') + '：' +
+        '<a href="mailto:' + esc(email) +
+        '?subject=' + encodeURIComponent('【纠错】流程名') +
+        '&amp;body=' + encodeURIComponent(tpl) + '">' + esc(email) + '</a></p>' +
+        '<p class="muted">邮件标题写「纠错 + 流程名」，正文按下面三行写就行：</p>' +
+        '<pre class="tpl">' + esc(tpl) + '</pre>';
+    } else {
+      out += '<p class="muted">纠错渠道正在设置中。</p>';
+    }
+
+    if (fb.responseNote) out += '<p class="muted">' + esc(fb.responseNote) + '</p>';
+    return out;
+  }
+
+  function renderAbout() {
+    var verified = FLOWS.filter(function (f) { return f.status === 'verified'; }).length;
+    main.innerHTML = '' +
+      '<a class="back" href="#/">← 返回流程列表</a>' +
+      '<h1>关于与来源</h1>' +
+      '<div class="prose">' +
+
+      '<h2>这个网站解决什么问题</h2>' +
+      '<p>大学里很多事不是难，是没人把话说全：要带什么材料、去哪个窗口、多久办完、什么情况会被退回来。' +
+      '这些信息散在通知文件、班级群和老生的经验里。这个网站把它们整理成可以一步步跟着走的流程图，' +
+      '每条流程都标明信息来源和核实时间。</p>' +
+      '<p>目前收录范围：' + esc(SITE.scope || '') + '，共 ' + FLOWS.length + ' 条流程，其中 ' + verified + ' 条已完成核实。</p>' +
+
+      '<h2>内容怎么来的</h2>' +
+      '<p>这批流程的<b>初稿由人工智能工具辅助检索学校公开信息汇总而成</b>，随后由团队成员逐条向学校官网、办事窗口和办过这件事的同学核实。' +
+      '每条流程页面上都标明了当前状态：核实通过的显示「已核实」，还没核实到来源的显示「内容已录入 · 来源核实中」。</p>' +
+      '<p>我们把这件事写在这里，是因为校园办事信息错一条，就会有人白跑一趟、甚至错过申请窗口。' +
+      '所以我们宁可让一部分条目停留在「来源核实中」，也不把没核实过的内容当成结论告诉你。</p>' +
+
+      '<h2>我们不收集你的任何信息</h2>' +
+      '<ul>' +
+      '<li>没有账号，没有登录，没有后台数据库。</li>' +
+      '<li>没有统计埋点，不接入任何第三方分析、广告或字体服务。</li>' +
+      '<li>你在步骤里勾选的「材料已备齐」只存在你自己浏览器的 localStorage 里，不会上传到任何地方，清除浏览器数据即消失。</li>' +
+      '<li>页面不请求任何外部域名。</li>' +
+      '</ul>' +
+
+      '<h2>免责说明</h2>' +
+      '<p>校园办事流程会随时间和政策变化。本站内容最后更新于 ' + esc(SITE.updatedAt || '—') +
+      '，仅供参考，不构成任何办理承诺。请以学校官网、学院通知或办事窗口的答复为准。</p>' +
+
+      '<h2>第三方素材与授权</h2>' +
+      '<ul>' +
+      '<li>字体：只使用系统自带字体，未引入任何外部字体文件。</li>' +
+      '<li>图标：使用自制 SVG 图标，无第三方图标库。</li>' +
+      '<li>代码依赖：零第三方运行时依赖，未引入任何前端框架或 UI 库。</li>' +
+      '<li>后勤服务电话：来自学校发放的《校园生活服务指南》。' +
+      '<b>其中涉及个人手机号码的，本站一律不公开</b>——只收录以部门、科室或岗位名义对外公布的服务电话。' +
+      '需要联系具体管理人员时，请通过本班生活委员或对应办公室索取。</li>' +
+      '</ul>' +
+
+      '<h2>人工智能工具使用情况</h2>' +
+      '<p>本项目在以下两个环节使用了人工智能工具：<b>①</b> 检索并汇总学校公开的办事信息，形成流程初稿；<b>②</b> 辅助整理数据结构与编写前端代码。' +
+      '选题方向、信息架构、视觉方案、内容核实与用户测试由团队完成。</p>' +
+      '<p>所有流程内容都进入了人工核实流程：能核实到来源的标注「已核实」并附出来源，核实不到的保留「来源核实中」状态，' +
+      '核实后发现与官方信息冲突的条目直接删除。所有由人工智能生成的代码均经过团队逐条复核与修改。</p>' +
+      '<p>按照竞赛要求，本项目的人工智能工具使用情况已在《人工智能工具使用情况说明》中完整披露，过程记录可查。</p>' +
+
+      '<h2>反馈与纠错</h2>' +
+      feedbackHTML() +
+
+      '</div>';
+  }
+
+  /* ---------------- 路由 ---------------- */
+
+  function route() {
+    var hash = location.hash || '#/';
+    var m = hash.match(/^#\/f\/(.+)$/);
+    if (m) { renderFlow(decodeURIComponent(m[1])); }
+    else if (hash.indexOf('#/about') === 0) { renderAbout(); }
+    else { renderHome(); }
+    window.scrollTo(0, 0);
+  }
+
+  function footer() {
+    var note = document.getElementById('footer-note');
+    if (note) {
+      note.textContent = (SITE.name || '') + '　·　' + (SITE.school || '') + ' ' + (SITE.campus || '') +
+        '　·　内容更新于 ' + (SITE.updatedAt || '') + '　·　不收集任何个人信息　·　请以学校官方通知为准';
+    }
+  }
+
+  window.addEventListener('hashchange', route);
+
+  footer();
+  route();
+
+  // 离线可用：只在 http(s) 下注册 Service Worker。
+  // file:// 打开时自动跳过；离线单文件版由 build-single.mjs 设置 __SINGLE_FILE__ 跳过，
+  // 避免在console里留下一个没有意义的 404。
+  if (!window.__SINGLE_FILE__ && 'serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () { /* 注册失败不影响使用 */ });
+    });
+  }
+})();
+</script>
+</body>
+</html>
