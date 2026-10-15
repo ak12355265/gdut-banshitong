@@ -117,6 +117,15 @@ p { margin: 0 0 12px; }
 .stat b { font-size: 22px; color: var(--brand); line-height: 1.2; }
 .stat span { font-size: 12px; color: var(--ink-3); }
 
+/* 徽章图例：用户测试发现橙色标签不容易懂，这里直接补一句解释 */
+.legend {
+  margin-top: 18px; padding: 12px 16px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); font-size: 13px; color: var(--ink-2);
+  line-height: 2.1;
+}
+.legend .badge { margin-right: 4px; }
+
 /* ---------- 搜索 ---------- */
 .search { margin: 22px 0 8px; position: relative; }
 .search input {
@@ -305,7 +314,7 @@ p { margin: 0 0 12px; }
  *
  * status 取值：
  *   "draft"    来源待登记。若 steps 为空，界面显示"内容核实中"；
- *              若 steps 已填，界面显示"内容已录入 · 来源核实中"。
+ *              若 steps 已填，界面显示"还没核实完 · 仅供参考"。
  *   "verified" 已核实（必须填写 verifiedBy / verifiedAt / sources）
  *   "demo"     演示样例（非真实流程，仅用于展示界面）
  *
@@ -499,7 +508,7 @@ window.FLOWS = [
     id: 'transcript',
     name: '成绩单打印',
     category: 'records',
-    aliases: ['打印成绩单', '成绩单', '中英文成绩单', '在读证明成绩单', 'GPA 证明', '密封成绩单'],
+    aliases: ['打印成绩单', '成绩单', '中英文成绩单', '在读证明成绩单', 'GPA 证明', '绩点怎么算', '平均学分绩点', '密封成绩单'],
     keywords: ['成绩单', '打印', '英文', '电子公章', 'GPA', '绩点', '自助打印', '出国', '密封', '骑缝章'],
     audience: '在校本科生（毕业生需走档案馆，不能用自助机）',
     summary: '在校生在各校区自助终端 24 小时随时打印，中英文成绩单和在读证明都能出；出国要密封件的必须再去人工窗口。',
@@ -578,7 +587,7 @@ window.FLOWS = [
     name: '缓考与补考',
     category: 'records',
     aliases: ['缓考', '补考', '申请缓考', '重修', '旷考', '缺考'],
-    keywords: ['缓考', '补考', '重修', '旷考', '病假', '医院证明', '成绩', '教务系统'],
+    keywords: ['缓考', '补考', '重修', '重修报名', '挂科', '不及格', '旷考', '病假', '医院证明', '成绩', '教务系统'],
     audience: '因疾病、意外等不可抗力无法参加期末考试，或需要参加补考、重修的本科生',
     summary: '缓考要在考试前 2 天在教务系统提交，走"任课老师认定资格 → 教务处审核"；审核通过后参加下学期初的缓补考。',
     steps: [
@@ -1108,7 +1117,7 @@ window.FLOWS = [
     id: 'library',
     name: '图书馆借书和找书',
     category: 'library',
-    aliases: ['借书', '还书', '找书', '续借', '索书号', '图书馆', '研讨间', '座位预约'],
+    aliases: ['借书', '还书', '找书', '续借', '索书号', '图书馆', '丢书', '弄丢书', '赔书', '研讨间', '座位预约'],
     keywords: ['图书馆', '借书', '还书', '续借', '索书号', '超期', '违约金', '预约', '委托借书', '研讨间', '藏书', '楼层'],
     audience: '在校本科生、研究生与教职工',
     summary: '全日制学生一次可借 30 册、借期 60 天，可续借 1 次（续期 30 天）；丢书按原书价 3 倍赔偿。',
@@ -1222,7 +1231,7 @@ window.FLOWS = [
     id: 'dorm-repair',
     name: '宿舍报修',
     category: 'service',
-    aliases: ['宿舍报修', '报修', '修灯', '修门', '空调维修', '热水报修', '下水道堵了', '厕所堵了'],
+    aliases: ['宿舍报修', '报修', '修灯', '修门', '灯坏了', '灯管坏了', '门坏了', '水龙头坏了', '热水器坏了', '空调维修', '热水报修', '下水道堵了', '厕所堵了'],
     keywords: ['宿舍', '报修', '灯管', '门', '风扇', '空调', '热水', '花洒', '水管', '水表', '下水道', '厕所', '堵塞', '洗衣机', '冰箱', '维修'],
     audience: '在校住宿学生',
     summary: '宿舍报修分四种情况走四条不同的路：楼内固定资产、空调、热水设备、个人电器——找错地方会白等。',
@@ -1347,7 +1356,7 @@ window.FLOWS = [
     id: 'life-service',
     name: '生活服务电话（送水、网络、电费、校医院）',
     category: 'service',
-    aliases: ['送水', '订水', '网络报修', '校园网', '电费', '充电费', '校医院', '看病', '急诊'],
+    aliases: ['送水', '订水', '网络报修', '校园网', '网连不上', '断网', '没网', '上不了网', '网络故障', '电费', '充电费', '校医院', '看病', '急诊'],
     keywords: ['送水', '订水', '网络', '校园网', '故障', '电费', '充值', '校医院', '急诊', '看病', '生活服务'],
     audience: '在校学生',
     summary: '送水、网络故障、电费充值、校医院——四个最常打的服务电话，以及各自的时间限制。',
@@ -1501,7 +1510,7 @@ window.FLOWS = [
     if (flow.status === 'verified') return '<span class="badge badge-verified">已核实</span>';
     if (flow.status === 'demo') return '<span class="badge badge-demo">演示样例 · 非真实流程</span>';
     // 内容已录入但来源还没登记完：如实区分，不要和"完全没内容"混成一句
-    if (stepCount(flow)) return '<span class="badge badge-draft">内容已录入 · 来源核实中</span>';
+    if (stepCount(flow)) return '<span class="badge badge-draft">还没核实完 · 仅供参考</span>';
     return '<span class="badge badge-draft">内容核实中</span>';
   }
 
@@ -1580,7 +1589,10 @@ window.FLOWS = [
     var hit = 0, total = 0;
     for (var g in qb) { if (!Object.prototype.hasOwnProperty.call(qb, g)) continue; total++; if (hb[g]) hit++; }
     var ratio = total ? hit / total : 0;
-    if (ratio > 0.34) { score += Math.round(ratio * 14); why.push('文字相近（匹配度 ' + Math.round(ratio * 100) + '%）'); }
+    // 长口语整句（如"书丢了要赔多少钱"）里混着大量与知识库无关的字，
+    // 二元组重合率会被稀释。原来要求 ratio > 0.34 才给分，
+    // 导致长句直接返回"没有找到"。改为阈值 0.15、重合多少给多少分。
+    if (ratio >= 0.15) { score += Math.round(ratio * 26); why.push('文字相近（匹配度 ' + Math.round(ratio * 100) + '%）'); }
 
     if (score <= 0) return null;
 
@@ -1611,11 +1623,16 @@ window.FLOWS = [
       '<div class="stat"><b>' + verified + '</b><span>条已完成核实</span></div>' +
       '<div class="stat"><b>0</b><span>个账号 / 不收集个人信息</span></div>' +
       '</div>' +
+      // 徽章图例：测试发现用户看不懂橙色标签，这里直接给出一句话解释
+      '<p class="legend">' +
+      '<span class="badge badge-verified">已核实</span> 有官方来源，可以放心参考　' +
+      '<span class="badge badge-draft">还没核实完 · 仅供参考</span> 内容已整理，来源还在核实，重要的事请再问一次' +
+      '</p>' +
       '</section>';
   }
 
   function searchHTML() {
-    var chips = ['转专业', '成绩单', '借教室', '缓考', '奖学金', '盖章', '图书馆'];
+    var chips = ['报修', '转专业', '成绩单', '借教室', '缓考', '奖学金', '盖章', '图书馆'];
     return '' +
       '<section class="search">' +
       '<input id="q" type="search" autocomplete="off" placeholder="你要办什么事？例如：学生证丢了 / 想转专业 / 打印成绩单" ' +
@@ -2084,9 +2101,9 @@ window.FLOWS = [
 
       '<h2>内容怎么来的</h2>' +
       '<p>这批流程的<b>初稿由人工智能工具辅助检索学校公开信息汇总而成</b>，随后由团队成员逐条向学校官网、办事窗口和办过这件事的同学核实。' +
-      '每条流程页面上都标明了当前状态：核实通过的显示「已核实」，还没核实到来源的显示「内容已录入 · 来源核实中」。</p>' +
+      '每条流程页面上都标明了当前状态：核实通过的显示「已核实」，还没核实到来源的显示「还没核实完 · 仅供参考」。</p>' +
       '<p>我们把这件事写在这里，是因为校园办事信息错一条，就会有人白跑一趟、甚至错过申请窗口。' +
-      '所以我们宁可让一部分条目停留在「来源核实中」，也不把没核实过的内容当成结论告诉你。</p>' +
+      '所以我们宁可让一部分条目停留在「还没核实完」，也不把没核实过的内容当成结论告诉你。</p>' +
 
       '<h2>我们不收集你的任何信息</h2>' +
       '<ul>' +
@@ -2113,7 +2130,7 @@ window.FLOWS = [
       '<h2>人工智能工具使用情况</h2>' +
       '<p>本项目在以下两个环节使用了人工智能工具：<b>①</b> 检索并汇总学校公开的办事信息，形成流程初稿；<b>②</b> 辅助整理数据结构与编写前端代码。' +
       '选题方向、信息架构、视觉方案、内容核实与用户测试由团队完成。</p>' +
-      '<p>所有流程内容都进入了人工核实流程：能核实到来源的标注「已核实」并附出来源，核实不到的保留「来源核实中」状态，' +
+      '<p>所有流程内容都进入了人工核实流程：能核实到来源的标注「已核实」并附出来源，核实不到的保留「还没核实完」状态，' +
       '核实后发现与官方信息冲突的条目直接删除。所有由人工智能生成的代码均经过团队逐条复核与修改。</p>' +
       '<p>按照竞赛要求，本项目的人工智能工具使用情况已在《人工智能工具使用情况说明》中完整披露，过程记录可查。</p>' +
 
@@ -2155,6 +2172,12 @@ window.FLOWS = [
       navigator.serviceWorker.register('sw.js').catch(function () { /* 注册失败不影响使用 */ });
     });
   }
+
+  /* 供自动化测试调用的钩子：只暴露纯函数，不改变页面任何行为。
+   * 用途见 tools/test-search.mjs —— 检索算法是纯函数，可以在 Node 里直接跑，
+   * 这样能一次验证几十个查询并做回归，而不是靠手点浏览器。 */
+  window.__APP__ = { search: search, scoreFlow: scoreFlow, normalize: normalize, bigrams: bigrams };
+
 })();
 </script>
 </body>
