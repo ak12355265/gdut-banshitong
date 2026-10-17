@@ -4,12 +4,12 @@
 <!-- 离线单文件版：由 build-single.mjs 生成，请勿直接编辑 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>工大办事通 · 校园办事流程导航</title>
-<meta name="description" content="把广东工业大学东风路校区的高频办事流程，变成可以一步步跟着走的流程图。不需要注册，不收集任何个人信息。">
+<title>校园办事通 · 校园办事流程导航</title>
+<meta name="description" content="把校园高频办事流程，变成可以一步步跟着走的流程图。不需要注册，不收集任何个人信息。">
 <meta name="theme-color" content="#17457a">
-<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSLlt6XlpKflip7kuovpgJoiPgogIDxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMTc0NTdhIi8+CiAgPHBhdGggZD0iTTE4IDIyaDI4TTE4IDMyaDI4TTE4IDQyaDE4IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNC41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI0NiIgY3k9IjQyIiByPSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGI0NWUiIHN0cm9rZS13aWR0aD0iNCIvPgo8L3N2Zz4K">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSLmoKHlm63lip7kuovpgJoiPgogIDxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMTc0NTdhIi8+CiAgPHBhdGggZD0iTTE4IDIyaDI4TTE4IDMyaDI4TTE4IDQyaDE4IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNC41IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI0NiIgY3k9IjQyIiByPSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGI0NWUiIHN0cm9rZS13aWR0aD0iNCIvPgo8L3N2Zz4K">
 <style>
-/* 工大办事通 · 样式
+/* 校园办事通 · 样式
  * 设计原则：信息优先、高对比度、可打印、移动端可用
  * 字体只使用系统字体，不加载任何外部字体文件（避免授权与网络依赖）
  */
@@ -117,14 +117,16 @@ p { margin: 0 0 12px; }
 .stat b { font-size: 22px; color: var(--brand); line-height: 1.2; }
 .stat span { font-size: 12px; color: var(--ink-3); }
 
-/* 徽章图例：用户测试发现橙色标签不容易懂，这里直接补一句解释 */
+/* 徽章图例：用户测试发现橙色标签不容易懂；复测又发现手机上两段挤在一行，
+   所以改成两条各自成行、可换行 */
 .legend {
   margin-top: 18px; padding: 12px 16px;
   background: var(--card); border: 1px solid var(--line);
   border-radius: var(--radius); font-size: 13px; color: var(--ink-2);
-  line-height: 2.1;
+  display: flex; flex-direction: column; gap: 9px;
 }
-.legend .badge { margin-right: 4px; }
+.legend-item { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; line-height: 1.75; }
+.legend .badge { flex: none; }
 
 /* ---------- 搜索 ---------- */
 .search { margin: 22px 0 8px; position: relative; }
@@ -287,7 +289,7 @@ p { margin: 0 0 12px; }
     <a class="brand" href="#/">
       <span class="brand-mark" aria-hidden="true">办</span>
       <span class="brand-text">
-        <strong>工大办事通</strong>
+        <strong>校园办事通</strong>
         <small>校园办事流程导航</small>
       </span>
     </a>
@@ -308,7 +310,7 @@ p { margin: 0 0 12px; }
 
 <script>window.__SINGLE_FILE__ = true;</script>
 <script>
-/* 工大办事通 · 知识库
+/* 校园办事通 · 知识库
  * ------------------------------------------------------------------
  * 填写规范见 docs/知识库字段规范.md
  *
@@ -323,12 +325,12 @@ p { margin: 0 0 12px; }
  */
 
 window.SITE = {
-  name: '工大办事通',
-  school: '广东工业大学',
-  campus: '东风路校区',
+  name: '校园办事通',
+  school: '本校',
+  campus: '',
   updatedAt: '2026-10-14',
   // 取材范围说明，会显示在"关于与来源"页
-  scope: '东风路校区本科生高频办事事项',
+  scope: '本科生高频办事事项',
 
   /* 纠错渠道：把邮箱填进来，"关于与来源"页会自动生成纠错说明和反馈模板。
    * 建议单独注册一个专用邮箱，不要用私人常用邮箱（会被公开在作品里）。 */
@@ -372,7 +374,7 @@ window.FLOWS = [
     steps: [
       {
         title: '先确认你有没有资格',
-        detail: '硬性条件：所有课程无挂科（首次考核合格）。艺设学院（东风路）要求大一上绩点排名专业前 50%，不同接收学院的门槛不一样，以目标学院当年方案为准。另外不能跨高考科类转专业：物理类只能转入物理类专业，美术类只能转入美术类专业。',
+        detail: '硬性条件：所有课程无挂科（首次考核合格）。艺设学院（本校区）要求大一上绩点排名专业前 50%，不同接收学院的门槛不一样，以目标学院当年方案为准。另外不能跨高考科类转专业：物理类只能转入物理类专业，美术类只能转入美术类专业。',
         materials: [],
         place: '查看目标学院当年公布的转专业方案',
         duration: '春季学期开始前就要确认',
@@ -408,11 +410,11 @@ window.FLOWS = [
       },
       {
         title: '走完四层审批，准备接收学院考核',
-        detail: '审批链条共 4 层：学生提交 → 现学院（转出学院）初审 → 接收学院组织考核、评审 → 教务处复核 → 教务处公示录取名单。考核形式由接收学院自主决定，常见组合是绩点筛选 + 面试，部分专业增设笔试。东风路艺设学院往年做法：先看绩点排名筛选入围，之后面试，考察作品集和专业认知，没有笔试。',
+        detail: '审批链条共 4 层：学生提交 → 现学院（转出学院）初审 → 接收学院组织考核、评审 → 教务处复核 → 教务处公示录取名单。考核形式由接收学院自主决定，常见组合是绩点筛选 + 面试，部分专业增设笔试。本校区艺设学院往年做法：先看绩点排名筛选入围，之后面试，考察作品集和专业认知，没有笔试。',
         materials: ['作品集（如接收学院要求）'],
         place: '接收学院组织',
         duration: '按接收学院安排',
-        pitfalls: ['东风路艺设学院不设笔试，但面试会看作品集和专业认知，需要提前准备。']
+        pitfalls: ['本校区艺设学院不设笔试，但面试会看作品集和专业认知，需要提前准备。']
       },
       {
         title: '查询公示结果',
@@ -539,9 +541,9 @@ window.FLOWS = [
       },
       {
         title: '出国用途：带原件和信封到图书馆 723 办密封',
-        detail: '密封与骑缝章自助机办不了，必须走人工。教务处官方办理指引写明：携带成绩单及证明原件，并自备学校信封，前往各校区教务处/教务办核验与密封。东风路校区的办理点是图书馆 723，电话 37626229。去之前建议先打个电话确认当天的办理时间。',
+        detail: '密封与骑缝章自助机办不了，必须走人工。教务处官方办理指引写明：携带成绩单及证明原件，并自备学校信封，前往各校区教务处/教务办核验与密封。本校区的办理点是图书馆 723，电话 37626229。去之前建议先打个电话确认当天的办理时间。',
         materials: ['成绩单及证明原件', '自备学校信封'],
-        place: '东风路校区图书馆 723（电话 37626229）',
+        place: '图书馆 723（电话 37626229）',
         duration: '去之前先电话确认办理时间',
         pitfalls: [
           '必须自备学校信封，自助机不提供密封服务。',
@@ -559,7 +561,7 @@ window.FLOWS = [
     ],
     notes: [
       {
-        title: '广工本科百分制与绩点换算',
+        title: '本科百分制与绩点换算',
         lines: [
           '90–100 分 = 4.0　　85–89 分 = 3.7　　82–84 分 = 3.3',
           '78–81 分 = 3.0　　75–77 分 = 2.7　　72–74 分 = 2.3',
@@ -573,7 +575,7 @@ window.FLOWS = [
       {
         label: "教务处常见问答《成绩单相关证明》",
         url: "https://jwc.gdut.edu.cn/cjwd/zmjzjbl/cjdxgzm.htm",
-        note: "2026-10-14 查阅官网原文；东风路校区密封点（图书馆 723、37626229）由该页确认"
+        note: "2026-10-14 查阅官网原文；本校密封点（图书馆 723、37626229）由该页确认"
       }
     ],
     status: 'verified',
@@ -630,7 +632,7 @@ window.FLOWS = [
         pitfalls: [
           '缓考审核通过的课程，你不能再参加本学期的考试——考场签到表上已标注缓考，私自参加考试成绩无效。',
           '缓考不及格、或不能按时参加考试的，不能再补考。',
-          '有特殊原因需要取消缓考的，必须考前至少提前 2 天到教务处办理。官方问答写的是「教务处行政楼 314」，但没注明是哪个校区；东风路校区的教务处在图书馆大楼 7 楼（图书馆 723），去之前先打 37626229 确认地点。'
+          '有特殊原因需要取消缓考的，必须考前至少提前 2 天到教务处办理。官方问答写的是「教务处行政楼 314」，但没注明是哪个校区；本校区的教务处在图书馆大楼 7 楼（图书馆 723），去之前先打 37626229 确认地点。'
         ]
       },
       {
@@ -723,11 +725,11 @@ window.FLOWS = [
       },
       {
         title: '有疑问找：学生工作处学生资助管理中心',
-        detail: '奖助学金和学生资助的归口部门是学生工作处学生资助管理中心。联系电话：020-39322619、39322610；邮箱：xsczdb@gdut.edu.cn；部门主页：zxdk.gdut.edu.cn；办公地址：广州市番禺区广州大学城外环西路 100 号广东工业大学行政楼 401 室。',
+        detail: '奖助学金和学生资助的归口部门是学生工作处学生资助管理中心。联系电话：020-39322619、39322610；邮箱：xsczdb@gdut.edu.cn；部门主页：zxdk.gdut.edu.cn；办公地址：广州市番禺区广州大学城外环西路 100 号 行政楼 401 室。',
         materials: [],
         place: '学生工作处学生资助管理中心（大学城校区行政楼 401 室）',
         duration: '工作日办公',
-        pitfalls: ['资助管理中心在大学城校区，不在东风路。去之前先打电话确认是否需要本人到场。']
+        pitfalls: ['资助管理中心在大学城校区，不在本校。去之前先打电话确认是否需要本人到场。']
       }
     ],
     notes: [
@@ -779,7 +781,7 @@ window.FLOWS = [
     ],
     sources: [
       {
-        label: '《广东工业大学学生奖助政策简介》（2026 年 6 月）· 广东工业大学迎新网',
+        label: '《学生奖助政策简介》（2026 年 6 月）· 学校迎新网',
         url: 'https://yx.gdut.edu.cn/jxzx.htm',
         note: '2026-10-14 查阅官网原文'
       }
@@ -861,7 +863,7 @@ window.FLOWS = [
     ],
     sources: [
       {
-        label: '《广东工业大学学生奖助政策简介》（2026 年 6 月）· 广东工业大学迎新网',
+        label: '《学生奖助政策简介》（2026 年 6 月）· 学校迎新网',
         url: 'https://yx.gdut.edu.cn/jxzx.htm',
         note: '2026-10-14 查阅官网原文'
       }
@@ -899,7 +901,7 @@ window.FLOWS = [
       },
       {
         title: '到图书馆大楼 7 楼教务处办理',
-        detail: '教务处在这栋图书馆大楼的 7 楼，楼内楼层索引上标的就是「教务处」。学校官方办理指引给的地址是「东风路校区图书馆 723」，应即 7 楼 23 室。办公时间：周一至周五上午 8:30–12:00，下午 14:00–17:00；周末和法定节假日不对外办公。',
+        detail: '教务处在这栋图书馆大楼的 7 楼，楼内楼层索引上标的就是「教务处」。学校官方办理指引给的地址是「图书馆 723」，应即 7 楼 23 室。办公时间：周一至周五上午 8:30–12:00，下午 14:00–17:00；周末和法定节假日不对外办公。',
         materials: [],
         place: '图书馆大楼 7 楼教务处（官方指引：图书馆 723）',
         duration: '办公时间：周一至周五 8:30–12:00 / 14:00–17:00',
@@ -958,9 +960,9 @@ window.FLOWS = [
     steps: [
       {
         title: '确认你要借的场地归谁管',
-        detail: '可借用场地集中在东风路校区二号楼、四号楼、五号楼和设计工场，包含学生画室、专业工作室、设计工坊、综合材料实验室等，主要用于课程作业、毕设和竞赛创作。公共普通教室单独走教务处的教室借用渠道，和专业画室分开。',
+        detail: '可借用场地集中在本校二号楼、四号楼、五号楼和设计工场，包含学生画室、专业工作室、设计工坊、综合材料实验室等，主要用于课程作业、毕设和竞赛创作。公共普通教室单独走教务处的教室借用渠道，和专业画室分开。',
         materials: [],
-        place: '东风路校区二号楼 / 四号楼 / 五号楼 / 设计工场',
+        place: '本校二号楼 / 四号楼 / 五号楼 / 设计工场',
         duration: '—',
         pitfalls: ['普通教室不在学院借，要走教务系统，别跑错地方。']
       },
@@ -1101,7 +1103,7 @@ window.FLOWS = [
     ],
     sources: [
       {
-        label: "《广东工业大学公共教室使用管理办法》（课室管理中心，2023-03-28 发布）",
+        label: "《公共教室使用管理办法》（课室管理中心，2023-03-28 发布）",
         url: "https://cmc.gdut.edu.cn/info/1309/1156.htm",
         note: "2026-10-14 查阅官网原文；申请主体、多媒体授权方式由本文确认"
       }
@@ -1179,7 +1181,7 @@ window.FLOWS = [
     ],
     notes: [
       {
-        title: '东风路校区图书馆开放时间（周一至周日）',
+        title: '图书馆开放时间（周一至周日）',
         lines: [
           '图书馆开馆、阅览区、自修室：7:30–22:30',
           '总服务台：8:30–12:00、13:30–22:00',
@@ -1213,12 +1215,12 @@ window.FLOWS = [
         note: "2026-10-14 查阅官网原文；借阅册数表格与赔偿标准由本文确认"
       },
       {
-        label: "广东工业大学图书馆《开放时间》",
+        label: "图书馆《开放时间》",
         url: "https://library.gdut.edu.cn/bggk/kfsj.htm",
-        note: "2026-10-14 查阅官网时间表（图片），东风路校区各行开放时间已录入"
+        note: "2026-10-14 查阅官网时间表（图片），本校区各行开放时间已录入"
       },
       {
-        label: "《图书馆大楼楼层索引》现场指示牌（GDUT 制）",
+        label: "《图书馆大楼楼层索引》现场指示牌（校内指示牌）",
         url: "",
         note: "2026-10-17 团队成员现场拍摄核对。原「1 楼报刊现刊 / 2 楼文学艺术 / 3 楼社科历史 / 4 楼工业技术」为人工智能初稿的错误内容，已按指示牌整段更正"
       }
@@ -1469,7 +1471,7 @@ window.FLOWS = [
  * 9 条真实流程录入完成后已删除——一个虚构的办事流程留在成品里是纯粹的负债。 */
 </script>
 <script>
-/* 工大办事通 · 应用逻辑
+/* 校园办事通 · 应用逻辑
  * 零依赖、无后端、无网络请求。
  * 结构：路由 → 页面渲染 → 检索算法 → 分享导出
  */
@@ -1600,7 +1602,8 @@ window.FLOWS = [
     // 长口语整句（如"书丢了要赔多少钱"）里混着大量与知识库无关的字，
     // 二元组重合率会被稀释。原来要求 ratio > 0.34 才给分，
     // 导致长句直接返回"没有找到"。改为阈值 0.15、重合多少给多少分。
-    if (ratio >= 0.15) { score += Math.round(ratio * 26); why.push('文字相近（匹配度 ' + Math.round(ratio * 100) + '%）'); }
+    // 复测反馈：「匹配度 29%」看不懂。去掉百分比，改成大白话。
+    if (ratio >= 0.15) { score += Math.round(ratio * 26); why.push('说法接近'); }
 
     if (score <= 0) return null;
 
@@ -1619,23 +1622,29 @@ window.FLOWS = [
 
   /* ---------------- 首页 ---------------- */
 
+  /* 校区标识：匿名化后可能只保留其中一项或为空，这里统一拼接，避免出现多余空格 */
+  function venue() {
+    return [SITE.school, SITE.campus].filter(Boolean).join(' ');
+  }
+
   function heroHTML() {
     var verified = FLOWS.filter(function (f) { return f.status === 'verified'; }).length;
     return '' +
       '<section class="hero">' +
       '<h1>办事之前，先看一眼这条路怎么走</h1>' +
-      '<p class="lead">把 ' + esc(SITE.school || '') + esc(SITE.campus || '') + ' 的高频办事流程，拆成可以一步步跟着走的步骤：' +
+      '<p class="lead">把' + esc(venue()) + '的高频办事流程，拆成可以一步步跟着走的步骤：' +
       '要带什么材料、去哪办、多久办完、为什么会被退回。</p>' +
       '<div class="stats">' +
       '<div class="stat"><b>' + FLOWS.length + '</b><span>条办事流程</span></div>' +
       '<div class="stat"><b>' + verified + '</b><span>条已完成核实</span></div>' +
       '<div class="stat"><b>0</b><span>个账号 / 不收集个人信息</span></div>' +
       '</div>' +
-      // 徽章图例：测试发现用户看不懂橙色标签，这里直接给出一句话解释
-      '<p class="legend">' +
-      '<span class="badge badge-verified">已核实</span> 有官方来源，可以放心参考　' +
-      '<span class="badge badge-draft">还没核实完 · 仅供参考</span> 内容已整理，来源还在核实，重要的事请再问一次' +
-      '</p>' +
+      // 徽章图例：用户测试发现橙色标签不容易懂；复测又发现手机上两段挤在一行，
+      // 所以拆成两条各自成行。
+      '<div class="legend">' +
+      '<div class="legend-item"><span class="badge badge-verified">已核实</span><span>有官方来源，可以放心参考</span></div>' +
+      '<div class="legend-item"><span class="badge badge-draft">还没核实完 · 仅供参考</span><span>内容已整理，来源还在核实，重要的事请再问一次</span></div>' +
+      '</div>' +
       '</section>';
   }
 
@@ -1889,7 +1898,7 @@ window.FLOWS = [
       ctx.fillRect(0, 0, W, headH);
       ctx.fillStyle = 'rgba(255,255,255,.72)';
       setFont(ctx, 20, 400);
-      ctx.fillText((SITE.school || '') + ' ' + (SITE.campus || ''), x, 52);
+      ctx.fillText(venue(), x, 52);
       ctx.fillStyle = '#ffffff';
       setFont(ctx, 38, 700);
       var titleLines = wrapText(ctx, flow.name, maxW);
@@ -2025,7 +2034,7 @@ window.FLOWS = [
 
   function flowToText(flow) {
     var out = ['【' + flow.name + '】'];
-    if (SITE.school) out.push(SITE.school + (SITE.campus ? ' ' + SITE.campus : ''));
+    if (venue()) out.push(venue());
     if (flow.status === 'draft') out.push('（信息来源核实中，请以学校通知为准）');
     if (flow.status === 'demo') out.push('（演示样例，非真实流程）');
     out.push('');
@@ -2162,7 +2171,7 @@ window.FLOWS = [
   function footer() {
     var note = document.getElementById('footer-note');
     if (note) {
-      note.textContent = (SITE.name || '') + '　·　' + (SITE.school || '') + ' ' + (SITE.campus || '') +
+      note.textContent = (SITE.name || '') + '　·　' + venue() +
         '　·　内容更新于 ' + (SITE.updatedAt || '') + '　·　不收集任何个人信息　·　请以学校官方通知为准';
     }
   }
@@ -2184,7 +2193,7 @@ window.FLOWS = [
   /* 供自动化测试调用的钩子：只暴露纯函数，不改变页面任何行为。
    * 用途见 tools/test-search.mjs —— 检索算法是纯函数，可以在 Node 里直接跑，
    * 这样能一次验证几十个查询并做回归，而不是靠手点浏览器。 */
-  window.__APP__ = { search: search, scoreFlow: scoreFlow, normalize: normalize, bigrams: bigrams };
+  window.__APP__ = { search: search, scoreFlow: scoreFlow, normalize: normalize, bigrams: bigrams, route: route };
 
 })();
 </script>
