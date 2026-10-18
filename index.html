@@ -12,42 +12,49 @@
 /* 校园办事通 · 样式
  *
  * 设计方向：「办事笺」——把网站做成一册可以随手翻的办事手册／公文笺。
- * 具体取舍（每一条都是冲着"通用落地页模板感"去的）：
+ *
+ * 三级纸面层次（这是区分区域的关键，不靠投影）：
+ *   L0 画布  --bg   砂纸色，区块浮在这一层之上
+ *   L1 区块  --card 近白 + 1px 细边框：步骤块、流程卡片、说明卡
+ *   L2 内嵌  --sunken 更深一档：材料清单、模板、统计栏、图例
+ *
+ * 其余刻意的取舍：
  *   · 直角（2px）而不是 12px 圆角：公文和表格是方的
- *   · 不用柔和投影，改用 1px 实线／虚线做分隔：纸面上没有浮起来的卡片
+ *   · 不用柔和投影，改用边框与色阶做分隔：纸面上没有"浮起来"的卡片
+ *   · 区块标题用左侧粗竖条 + 衬线字，扫读时一眼知道换区
  *   · 徽章做成方框描边（已核实＝实线墨绿，未核实＝虚线朱红），像盖章栏
- *   · 步骤序号用等宽数字 01/02 落在左侧栏，取代圆形徽章
- *   · 标题用宋体（衬线），正文黑体，数字等宽——印刷品的排印层次
- *   · 暖纸白底 + 墨色正文，不用冷灰
+ *   · 步骤序号用等宽数字 01/02 落在左侧栏
+ *   · 标题宋体、正文黑体、数字等宽——印刷品的排印层次
  *
  * 约束：只使用系统字体，不加载外部字体文件；不依赖任何第三方库。
  */
 
 :root {
-  /* 纸与墨 */
-  --bg: #faf8f3;
-  --card: #fffdf9;
+  /* 三级纸面 */
+  --bg: #f1ebde;
+  --card: #fffefb;
+  --sunken: #f7f2e7;
+
   --ink: #1c1a17;
   --ink-2: #57524a;
   --ink-3: #8b857b;
 
-  /* 线：纸面上的格线 */
-  --line: #ddd6c9;
-  --line-2: #efe9dd;
+  --line: #d8cfbc;
+  --line-2: #e8e1d2;
 
   /* 墨蓝（主色）、墨绿（已核实）、朱红（待办／强调） */
   --brand: #1d3f5e;
   --brand-2: #142c43;
-  --brand-soft: #e9eff5;
+  --brand-soft: #e6edf4;
 
   --ok: #1b5744;
-  --ok-soft: #e8f0ea;
+  --ok-soft: #e4eee7;
 
   --accent: #a83a2b;
-  --accent-soft: #f8ebe7;
+  --accent-soft: #f7e7e3;
 
   --warn: #a83a2b;
-  --warn-soft: #f8ebe7;
+  --warn-soft: #f7e7e3;
 
   --radius: 2px;
   --radius-sm: 2px;
@@ -82,9 +89,9 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
 
-/* ---------- 顶栏：用双线做公文式的分隔 ---------- */
+/* ---------- 顶栏：双线做公文式分隔 ---------- */
 .topbar {
-  background: var(--bg);
+  background: var(--card);
   border-bottom: 3px double var(--line);
   position: sticky; top: 0; z-index: 5;
 }
@@ -121,17 +128,22 @@ h1 {
   margin: 0 0 10px;
   text-wrap: balance;
 }
+
+/* 区块标题：左侧粗竖条 + 衬线字，是"换区了"的主要信号 */
 h2 {
   font-family: var(--serif); font-weight: 700;
-  font-size: 19px; letter-spacing: .02em;
-  margin: 40px 0 14px; padding-bottom: 7px;
-  border-bottom: 1px solid var(--line);
+  font-size: 19px; letter-spacing: .03em;
+  margin: 46px 0 16px;
+  padding: 1px 0 1px 13px;
+  border-left: 5px solid var(--brand);
+  line-height: 1.5;
 }
 h3 { font-size: 15.5px; margin: 0 0 6px; letter-spacing: .01em; }
 p { margin: 0 0 12px; }
 .muted { color: var(--ink-3); font-size: 13px; }
 .lead { color: var(--ink-2); font-size: 16px; line-height: 1.8; }
 
+/* L1 区块：纸面白 + 细边框（不投影） */
 .card {
   background: var(--card);
   border: 1px solid var(--line);
@@ -153,18 +165,18 @@ p { margin: 0 0 12px; }
 .badge-verified { color: var(--ok); }
 .badge-draft { color: var(--accent); border-style: dashed; }
 .badge-demo { color: var(--brand); border-style: dotted; }
-.badge-plain { color: var(--ink-3); border-color: var(--line-2); }
+.badge-plain { color: var(--ink-3); border-color: var(--line); }
 
 /* ---------- 首页头部 ---------- */
-.hero { margin-bottom: 26px; }
+.hero { margin-bottom: 28px; }
 .hero h1 { margin-bottom: 12px; }
 
-/* 统计栏做成"文档头部信息区"：等宽数字 + 竖线分隔，不是三个浮动的数字 */
+/* 统计栏：内嵌色块（L2），像文档头部的信息条 */
 .stats {
   display: flex; flex-wrap: wrap;
-  margin-top: 20px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  margin-top: 22px;
+  background: var(--sunken);
+  border: 1px solid var(--line);
 }
 .stat {
   flex: 1 1 0; min-width: 120px;
@@ -172,23 +184,24 @@ p { margin: 0 0 12px; }
   padding: 11px 16px 12px;
   border-left: 1px solid var(--line);
 }
-.stat:first-child { border-left: 0; padding-left: 0; }
+.stat:first-child { border-left: 0; }
 .stat b {
   font-family: var(--mono); font-size: 21px; font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: var(--ink); line-height: 1.15;
+  color: var(--brand); line-height: 1.15;
 }
 .stat span { font-size: 11.5px; color: var(--ink-3); letter-spacing: .04em; }
 
-/* 徽章图例：不再做成卡片，改成一条说明栏 */
+/* 徽章图例：内嵌块，和统计栏同一层，形成"说明区" */
 .legend {
-  margin-top: 18px; padding-top: 14px;
-  border-top: 1px dashed var(--line);
+  margin-top: 14px; padding: 13px 16px;
+  background: var(--sunken);
+  border: 1px solid var(--line);
   font-size: 12.5px; color: var(--ink-2);
   display: flex; flex-direction: column; gap: 8px;
 }
 .legend-item { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; line-height: 1.8; }
-.legend .badge { flex: none; }
+.legend .badge { flex: none; background: var(--card); }
 
 /* ---------- 搜索 ---------- */
 .search { margin: 26px 0 0; position: relative; }
@@ -199,14 +212,10 @@ p { margin: 0 0 12px; }
   border: 1px solid var(--line);
   border-radius: 0;
   outline: none;
-  transition: border-color .15s, background-color .15s;
+  transition: border-color .15s;
 }
 .search input::placeholder { color: var(--ink-3); }
-.search input:focus {
-  border-color: var(--brand);
-  background: #fff;
-}
-/* 按钮改成文字"检索"，去掉箭头图标 */
+.search input:focus { border-color: var(--brand); }
 .search .go {
   position: absolute; right: 0; top: 0; bottom: 0; width: 62px;
   display: grid; place-items: center;
@@ -221,7 +230,7 @@ p { margin: 0 0 12px; }
 .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
 .chip {
   padding: 3px 11px; font-size: 12.5px; font-family: var(--sans);
-  background: transparent; color: var(--ink-2);
+  background: var(--card); color: var(--ink-2);
   border: 1px dashed var(--line);
   border-radius: 0; cursor: pointer;
   letter-spacing: .03em;
@@ -229,39 +238,33 @@ p { margin: 0 0 12px; }
 }
 .chip:hover { border-style: solid; border-color: var(--accent); color: var(--accent); }
 
-/* ---------- 流程卡片：做成目录条目，而不是浮动卡片 ---------- */
+/* ---------- 流程卡片：L1 白块，靠边框和色阶从画布上浮出来 ---------- */
 .grid {
-  display: grid; gap: 0 26px;
-  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 .flow-card {
   display: block; color: inherit;
-  padding: 13px 0 14px;
-  border-top: 1px solid var(--line-2);
-  border-left: 2px solid transparent;
-  border-radius: 0;
-  background: transparent;
+  padding: 15px 17px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line);
+  border-radius: var(--radius);
   transition: border-left-color .13s, background-color .13s;
 }
 .flow-card:hover {
   text-decoration: none;
   border-left-color: var(--accent);
-  background: rgba(168, 58, 43, .022);
-  padding-left: 11px;
+  background: #fff;
 }
-.flow-card h3 {
-  margin: 0 0 5px; font-size: 15.5px; letter-spacing: .01em;
-}
+.flow-card h3 { margin: 0 0 6px; font-size: 15.5px; letter-spacing: .01em; }
 .flow-card:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-.flow-card p { margin: 0 0 9px; font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+.flow-card p { margin: 0 0 10px; font-size: 13px; color: var(--ink-2); line-height: 1.7; }
 .flow-card .meta { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
 
-.result { padding: 14px 0; }
+.result { padding: 15px 17px 14px; }
 .result h3 { margin: 0 0 4px; font-size: 15.5px; }
-.why {
-  font-size: 12px; color: var(--accent); margin: 0;
-  letter-spacing: .03em;
-}
+.why { font-size: 12px; color: var(--accent); margin: 0; letter-spacing: .03em; }
 .why::before { content: "匹配理由："; color: var(--ink-3); letter-spacing: 0; }
 .score { font-size: 11.5px; color: var(--ink-3); font-family: var(--mono); }
 
@@ -271,7 +274,16 @@ p { margin: 0 0 12px; }
   letter-spacing: .03em;
 }
 .back:hover { color: var(--brand); text-decoration: none; border-bottom: 1px solid var(--brand); }
-.detail-head { margin-bottom: 22px; padding-bottom: 16px; border-bottom: 3px double var(--line); }
+
+/* 详情页头部做成 L1 白块，和下面的步骤块形成"封头 + 正文"的关系 */
+.detail-head {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 18px 20px 16px;
+  margin-bottom: 22px;
+}
 .detail-head h1 { margin-bottom: 8px; }
 .detail-head .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
 
@@ -279,54 +291,47 @@ p { margin: 0 0 12px; }
 .kv dt { color: var(--ink-3); letter-spacing: .04em; }
 .kv dd { margin: 0; }
 
-/* 步骤：等宽编号落在左侧栏 + 一条竖线贯穿，取代圆形序号 */
+/* 步骤：白块 + 等宽编号落在左侧栏 */
 .steps { list-style: none; margin: 0; padding: 0; }
 .step {
   position: relative;
-  padding: 0 0 20px 56px;
-  border-left: 1px solid var(--line);
+  padding: 0 0 12px 46px;
   margin-left: 0;
 }
-.step:last-child { border-left-color: transparent; padding-bottom: 0; }
+.step:last-child { padding-bottom: 0; }
 .step::before {
   content: attr(data-n);
-  position: absolute; left: -1px; top: 1px;
-  /* 编号压在竖线上，像表格的行号 */
-  transform: translateX(-100%);
-  padding-right: 12px;
-  width: 44px; text-align: right;
-  background: transparent;
+  position: absolute; left: 0; top: 13px;
+  width: 34px; text-align: right;
   color: var(--accent);
   font-family: var(--mono); font-size: 12.5px; font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: .06em;
-  line-height: 1.9;
+  line-height: 1.6;
 }
 .step-body {
-  padding: 0 0 0 0;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
+  padding: 14px 18px 15px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 .step-body h3 {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-family: var(--serif); font-size: 17px; font-weight: 700;
   letter-spacing: .02em;
 }
-.step-body > p { font-size: 14px; color: var(--ink-2); line-height: 1.8; }
+.step-body > p { font-size: 14px; color: var(--ink-2); line-height: 1.8; margin-bottom: 0; }
+.step-body > p + * { margin-top: 11px; }
 
 .facts { display: grid; gap: 5px; margin: 11px 0 0; font-size: 13px; }
 .fact { display: flex; gap: 10px; }
-.fact b {
-  flex: none; width: 70px; color: var(--ink-3); font-weight: 400;
-  letter-spacing: .04em;
-}
+.fact b { flex: none; width: 70px; color: var(--ink-3); font-weight: 400; letter-spacing: .04em; }
 
-/* 材料清单：虚线框 + 勾选，像一张待办清单 */
+/* 材料清单：内嵌色块（L2），和步骤的白块区分开 */
 .mats {
   list-style: none; margin: 12px 0 0; padding: 9px 13px;
-  background: transparent;
-  border: 1px dashed var(--line);
+  background: var(--sunken);
+  border: 1px solid var(--line-2);
   border-radius: 0;
 }
 .mats li { display: flex; gap: 9px; align-items: flex-start; font-size: 13px; padding: 3px 0; }
@@ -335,35 +340,30 @@ p { margin: 0 0 12px; }
 .mats input:checked + label { color: var(--ink-3); text-decoration: line-through; }
 
 .pitfall {
-  margin-top: 12px; padding: 9px 13px;
+  margin-top: 12px; padding: 10px 13px;
   background: var(--accent-soft);
-  border-left: 2px solid var(--accent);
+  border-left: 3px solid var(--accent);
   border-radius: 0;
   font-size: 13px; color: var(--accent);
   line-height: 1.75;
 }
-.pitfall b {
-  display: block; margin-bottom: 2px;
-  letter-spacing: .08em; font-size: 11.5px;
-}
+.pitfall b { display: block; margin-bottom: 3px; letter-spacing: .08em; font-size: 11.5px; }
 
 .empty {
-  padding: 26px 22px; text-align: center;
-  background: transparent;
+  padding: 28px 24px; text-align: center;
+  background: var(--card);
   border: 1px dashed var(--line);
-  border-radius: 0;
+  border-radius: var(--radius);
 }
 .empty h3 { margin-bottom: 6px; font-family: var(--serif); font-size: 17px; }
 .needlist { list-style: none; margin: 16px 0 0; padding: 0; text-align: left; display: grid; gap: 5px; }
 .needlist li { font-size: 13px; color: var(--ink-2); padding-left: 22px; position: relative; }
-.needlist li::before {
-  content: "□"; position: absolute; left: 0; color: var(--ink-3);
-}
+.needlist li::before { content: "□"; position: absolute; left: 0; color: var(--ink-3); }
 
 .actions { display: flex; gap: 9px; flex-wrap: wrap; margin: 26px 0 0; }
 .btn {
   padding: 9px 17px; font-size: 13.5px; font-family: var(--sans); cursor: pointer;
-  background: transparent; color: var(--ink);
+  background: var(--card); color: var(--ink);
   border: 1px solid var(--line);
   border-radius: 0;
   letter-spacing: .05em;
@@ -376,7 +376,8 @@ p { margin: 0 0 12px; }
 .notice {
   margin-top: 24px; padding: 13px 16px;
   background: var(--brand-soft);
-  border-left: 2px solid var(--brand);
+  border: 1px solid rgba(29, 63, 94, .22);
+  border-left: 3px solid var(--brand);
   border-radius: 0;
   font-size: 12.5px; color: var(--brand-2);
   line-height: 1.8;
@@ -387,13 +388,13 @@ p { margin: 0 0 12px; }
 .sources li { padding: 7px 0; border-bottom: 1px solid var(--line-2); }
 .sources li:last-child { border-bottom: 0; }
 
-/* ---------- 补充信息卡片：改成"带标题的表格块" ---------- */
+/* ---------- 补充信息卡片：L1 白块 + 顶部墨蓝粗线 ---------- */
 .note-card {
-  background: transparent;
+  background: var(--card);
   border: 1px solid var(--line);
-  border-top: 2px solid var(--brand);
-  border-radius: 0;
-  padding: 14px 18px 12px;
+  border-top: 3px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 15px 18px 13px;
   margin-bottom: 12px;
 }
 .note-card h3 {
@@ -404,7 +405,7 @@ p { margin: 0 0 12px; }
   list-style: none; margin: 0; padding: 0;
   font-size: 13px; color: var(--ink-2); line-height: 1.85;
 }
-.notelist li { padding: 3px 0 3px 0; display: flex; gap: 9px; align-items: baseline; }
+.notelist li { padding: 3px 0; display: flex; gap: 9px; align-items: baseline; }
 .notelist li::before {
   content: "—"; flex: none; color: var(--ink-3);
   font-family: var(--mono); font-size: 11px;
@@ -412,16 +413,16 @@ p { margin: 0 0 12px; }
 
 /* ---------- 关于页 ---------- */
 .prose { font-size: 14.5px; line-height: 1.85; }
-.prose h2 { margin-top: 38px; }
+.prose h2 { margin-top: 42px; }
 .prose ul { padding-left: 20px; }
 .prose li { margin-bottom: 7px; }
 .prose code {
-  background: var(--line-2); padding: 1px 5px;
+  background: var(--sunken); border: 1px solid var(--line-2); padding: 1px 5px;
   font-family: var(--mono); font-size: 12.5px;
 }
 .prose .tpl {
-  background: var(--card);
-  border: 1px dashed var(--line);
+  background: var(--sunken);
+  border: 1px solid var(--line);
   border-radius: 0;
   padding: 13px 16px; margin: 12px 0 18px;
   font-size: 13px; line-height: 1.95;
@@ -432,8 +433,9 @@ p { margin: 0 0 12px; }
 /* ---------- 页脚 ---------- */
 .footer {
   border-top: 3px double var(--line);
-  background: transparent;
+  background: var(--card);
   padding: 18px 0 34px;
+  margin-top: 34px;
 }
 .footer p { margin: 0; }
 
@@ -442,24 +444,29 @@ p { margin: 0 0 12px; }
   main { padding: 22px 17px 46px; }
   .wrap { padding: 0 17px; }
   h1 { font-size: 23px; }
+  h2 { margin: 38px 0 14px; font-size: 17.5px; }
   .brand-text small { display: none; }
   .kv { grid-template-columns: 74px 1fr; }
   .stats { display: grid; grid-template-columns: 1fr 1fr; }
-  .stat { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
+  .stat { border-left: 0; border-top: 1px solid var(--line); }
   .stat:nth-child(1), .stat:nth-child(2) { border-top: 0; }
   .stat:nth-child(3) { grid-column: 1 / -1; }
-  .step { padding-left: 40px; }
-  .step::before { width: 32px; padding-right: 9px; font-size: 11.5px; }
+  .detail-head { padding: 15px 16px 14px; }
+  .step { padding-left: 38px; }
+  .step::before { width: 30px; font-size: 11.5px; }
+  .step-body { padding: 13px 14px 14px; }
   .search .go { width: 54px; letter-spacing: .08em; font-size: 12.5px; }
 }
 
 /* ---------- 打印（分享给同学时可直接打印） ---------- */
 @media print {
   .topbar, .footer, .actions, .search, .back, .skip, .legend, .chips { display: none !important; }
-  body { background: #fff; background-image: none; font-size: 11.5pt; }
-  .card, .step-body, .note-card { box-shadow: none; border-color: #bbb; }
-  .step { break-inside: avoid; }
-  .detail-head { border-bottom-color: #bbb; }
+  body { background: #fff; font-size: 11.5pt; }
+  .card, .step-body, .flow-card, .note-card, .detail-head, .stats, .legend, .mats {
+    box-shadow: none; border-color: #bbb; background: #fff;
+  }
+  .step { break-inside: avoid; padding-bottom: 8px; }
+  h2 { break-after: avoid; }
   a { color: #000; }
 }
 </style>
